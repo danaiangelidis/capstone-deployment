@@ -52,19 +52,62 @@ body {
 
 /* Main Content */
 
-main {
-    width: 50%;
-    margin: auto;
-    padding-left: 120px;
-    padding-top: 15%;
-}
-
-main h1, p {
-    text-align: center;
-    color: rgb(88, 88, 88);
-}
-
 /* Media Query */
 
-@media only screen and (min-width: 800px) {
-}
+
+
+
+a {
+    color: #17a2b8;
+  }
+  .left {
+    position: relative;
+    left:50%;
+    margin: 15px;
+  }
+  
+  .right {
+    position: relative;
+    left: 50%;
+    margin: 15px;
+  }
+  
+  .btn {
+    outline: none;
+    color: black;
+    background-color: #17a2b8;
+    box-shadow: 0 0 0 0;
+  }
+
+  .backbutton{
+    outline: none;
+    color: black;
+    background-color: #17a2b8;
+    border: 2px solid white;
+    box-shadow: 0 0 0 0;
+  }
+  .goback{
+    
+    margin:25px;
+  }
+  
+  .form-table {
+    margin: auto;
+    
+  }
+  
+  
+  .form-table input, .form-table select, .form-table textarea {
+    border-radius: 5px;
+    color:white;
+    border: 2px solid white;
+    outline: none;
+    background: none;
+    padding: 10px;
+    width: 300px;
+    margin-bottom: 10px;
+  }
+  .form-table label{
+   font-size: 20px;
+   margin-right: 10px;
+  }

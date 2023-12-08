@@ -51,17 +51,45 @@ body {
 }
 
 /* Main Content */
-
 main {
-    width: 50%;
+    width: 90%;
     margin: auto;
     padding-left: 120px;
     padding-top: 15%;
 }
 
-main h1, p {
+main p {
     text-align: center;
-    color: rgb(88, 88, 88);
+    color: white;
+}
+
+main h1 {
+    text-align: center;
+    color: red;
+}
+
+/* Form */
+
+.add {
+    padding: 10px 20px;
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+
+label,
+input {
+    display: inline-block;
+}
+
+label {
+    width: 200px;
+    text-align: left;
+    padding: 5px;
+}
+
+.helptext {
+    display: none;
 }
 
 /* Media Query */
