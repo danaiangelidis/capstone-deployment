@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+    <link rel="stylesheet" href="../../static/css/inventory.css">
+</head>
+
+
+  <nav id="main-nav">
+      <a href="{% url 'home' %}"><img src="../../static/assets/logo.png"></a>
+      <ul>
+        <li><a href="{% url 'calendar' %}">Calendar</a></li>
+        <li>Earnings</li>
+        <li>Inventory</li>
+        <li><a href="{% url 'employee_list' %}">Employees</a></li>
+        <li<a href="{% url 'invoicing' %}">Invoices</a></li>
+        <li>Payroll</li>
+        <li>Settings</li>
+      </ul>
+  </nav>
+  <main id="main-content">
+    <header>
+    <h1>Inventory</h1>
+    </header>
+    <br>
+<table>
+  {% for item in all %}
+  
+    <th><a href ="{% url 'edit_inventory' item.id%}"><strong>ID:</strong> {{item.stockNumber}}</a></th><br>
+    <td>Type: {{item.type}}</td>
+    <td>Quantity: {{item.quantity}}</td>
+    <td>Price: ${{item.price}}</td>
+    <td>Brand Name: {{item.partName}}</td>
+    <td>Description: {{item.description}}</td>
+    <td><div class="right"><a class="btn btn-info table" href="{% url 'edit_inventory' item.id%}">edit</a></div></td>
+    <td><div class="right"><a onclick="return confirm('are you sure')" class="btn btn-info table" href="{% url 'delete_inventory' item.id%}">delete</a></div></td>
+    <tr></tr>
+  {% endfor %}
+</table>
+</main>
+<body>
+  {% block content %}
+    <div class="goback">
+            <a class="btn btn-info left" href="{% url 'new_inventory' %}">Add Inventory</a>
+    </div>
+    {% endblock %}
+</body>
+
+
+
+
+</html>

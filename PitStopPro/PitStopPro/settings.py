@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     "Inventory",
     "Invoicing",
     "debug_toolbar",
-    "Home"
+    "Home",
+    "userSettings",
+    "Pricing",
 ]
 
 MIDDLEWARE = [

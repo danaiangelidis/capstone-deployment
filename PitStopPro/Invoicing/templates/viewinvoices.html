@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Invoicing</title>
+        <link rel="stylesheet" href="../../static/css/viewinvoices.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/images/logo.png"></a>
+            <ul>
+                <li><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li>Earnings</li>
+                <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'employee_list' %}">Employees</a></li>
+                <li><a href="{% url 'invoicing' %}">Invoices</a></li>
+                <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                <li><a href="{% url 'settings/' %}">Settings</a></li>
+            </ul>
+        </nav>
+        <section id="title">
+            <h1>Created Invoices</h1>
+            <a href="{% url 'createinvoice' %}">
+                <button>+ Create New Invoice</button>
+            </a>
+        </section>
+        <section id="invoices">
+        {% for invoice in invoices %}
+            <article class="invoice">
+                <div class="from">
+                    <h2>{{invoice.CompanyName}}</h2>
+                    <p>{{invoice.companyAddress}}, {{invoice.companyCity}}, {{invoice.companyState}}</p>
+                    <p>{{invoice.dateIssued}}</p>
+                </div>
+                <hr>
+                <div class="to">
+                    <h3>{{invoice.firstName}} {{invoice.lastName}}</h3>
+                    <p>{{invoice.address}}, {{invoice.city}}, {{invoice.state}}</p>
+                    <p>{{invoice.email}}</p>
+                    <p>Vehicle: {{invoice.color}} {{invoice.year}} {{invoice.make}} {{invoice.model}} {{invoice.type}}</p>
+                    <p>Plate Number: {{invoice.plateNumber}}</p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="desc">Description</th>
+                            <th class="price">Price</th>
+                            <th class="qty">Quantity</th>
+                        </tr>
+                        <tr>
+                            <td class="desc">{{invoice.item1Desc}}</td>
+                            <td>${{invoice.item1Price}}</td>
+                            <td>{{invoice.item1Qty}}</td>
+                        </tr>
+                        <tr>
+                            <td class="desc">{{invoice.item2Desc}}</td>
+                            <td>${{invoice.item2Price}}</td>
+                            <td>{{invoice.item2Qty}}</td>
+                        </tr>
+                        <tr>
+                            <td class="desc">{{invoice.item3Desc}}</td>
+                            <td>${{invoice.item3Price}}</td>
+                            <td>{{invoice.item3Qty}}</td>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="totals">
+                    <p>Total labor: ${{invoice.totalLabor}}</p>
+                    <p>Total items: ${{invoice.totalItems}}</p>
+                    <hr>
+                    <p>Total before tax: ${{invoice.totalNoTax}}</p>
+                    <p>Tax: {{invoice.Tax}}%</p>
+                </div>
+                <div class="subtotal">
+                    <h1>Subtotal: ${{invoice.totalPrice}}</h1>
+                </div>
+            </article>
+        {% endfor %}
+        </main>
+        <footer id="main-footer">
+            
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Create An Invoice</title>
+        <link rel="stylesheet" href="../../static/css/createinvoice.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/images/logo.png"></a>
+            <ul>
+                <li><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li>Earnings</li>
+                <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'employee_list' %}">Employees</a></li>
+                <li><a href="{% url 'invoicing' %}">Invoices</a></li>
+                <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                <li><a href="{% url 'settings/' %}">Settings</a></li>
+            </ul>
+        </nav>
+        <main id="main-content">
+            <form method="POST" action="{% url 'createinvoice' %}">
+                <h1>Create An Invoice</h1>
+                {% csrf_token %}
+                <section id="client-info">
+                    <h3>Client Information</h3>
+                    <p>
+                        <label>First Name:</label>
+                        {{ form.firstName }}
+                    </p>
+                    <p>
+                        <label>Last Name:</label>
+                        {{ form.lastName }}
+                    </p>
+                    <p>
+                        <label>Address:</label>
+                        {{ form.address }}
+                    </p>
+                    <p>
+                        <label>City:</label>
+                        {{ form.city }}
+                    </p>
+                    <p>
+                        <label>State:</label>
+                        {{ form.state }}
+                    </p>
+                    <p>
+                        <label>Email:</label>
+                        {{ form.email }}
+                    </p>
+                </section>
+                <hr>
+                <section id="vehicle-info">
+                    <h3>Vehicle Information</h3>
+                    <p>
+                        <label>Type (Sedan or SUV):</label>
+                        {{ form.type }}
+                    </p>
+                    <p>
+                        <label>Year:</label>
+                        {{ form.year }}
+                    </p>
+                    <p>
+                        <label>Make:</label>
+                        {{ form.make }}
+                    </p>
+                    <p>
+                        <label>Model:</label>
+                        {{ form.model }}
+                    </p>
+                    <p>
+                        <label>Color:</label>
+                        {{ form.firstName }}
+                    </p>
+                    <p>
+                        <label>License Plate Number:</label>
+                        {{ form.plateNumber }}
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Labor Costs</h3>
+                    <p>
+                        <label>Labor Costs:</label>
+                        {{ form.laborHours }}
+                    </p>              
+                    <p>
+                        <label>Labor Rate:</label>
+                        {{ form.laborRate }}
+                    </p>  
+                </section>
+                <hr>
+                <section id="items">
+                    <h3>Itemized Costs</h3>
+                    <h3>Item 1</h3>
+                    <p>
+                        <label>Description:</label>
+                        {{ form.item1Desc }}
+                    </p>
+                    <p>
+                        <label>Price:</label>
+                        {{ form.item1Price }}
+                    </p>
+                    <p>
+                        <label>Quantity:</label>
+                        {{ form.item1Qty }}
+                    </p>
+                    <h3>Item 2</h3>
+                    <p>
+                        <label>Description:</label>
+                        {{ form.item2Desc }}
+                    </p>
+                    <p>
+                        <label>Price:</label>
+                        {{ form.item2Price }}
+                    </p>
+                    <p>
+                        <label>Quantity:</label>
+                        {{ form.item2Qty }}
+                    </p>
+                    <h3>Item 3</h3>
+                    <p>
+                        <label>Description:</label>
+                        {{ form.item3Desc }}
+                    </p>
+                    <p>
+                        <label>Price:</label>
+                        {{ form.item3Price }}
+                    </p>
+                    <p>
+                        <label>Quantity:</label>
+                        {{ form.item3Qty }}
+                    </p>
+                </section>
+                <hr>
+                <section id="totals">
+                    <h3>Totals</h3>
+                    <p>
+                        <label>Total Labor Costs:</label>
+                        {{ form.totalLabor }}
+                    </p>
+                    <p>
+                        <label>Total Item Costs:</label>
+                        {{ form.totalItems }}
+                    </p>
+                    <p>
+                        <label>Total Without Tax:</label>
+                        {{ form.totalNoTax }}
+                    </p>
+                    <p>
+                        <label>Tax:</label>
+                        {{ form.Tax }}
+                    </p>
+                    <p>
+                        <label>Subtotal:</label>
+                        {{ form.totalPrice }}
+                    </p>
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+        <footer id="main-footer">
+            <a href="{% url 'invoicing' %}"><p>View All Invoices</p></a>
+        </footer>
+    </body>
+</html>

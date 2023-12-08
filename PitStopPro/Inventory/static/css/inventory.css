@@ -1,0 +1,94 @@
+/* Body */
+body {
+    background-color: rgb(51, 51, 51);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+    color: white;
+}
+
+/* Main Navigation */
+
+#main-nav {
+    width: 120px;
+    height: 100%;
+    position: fixed;
+    background-color: rgb(74, 74, 74);
+    z-index: 1;
+    top: 0;
+    left: 0;
+    padding: 0px 0px;
+    box-shadow: 2px 0px 5px rgb(37, 37, 37);
+    overflow: hidden;
+    max-width: 15%;
+}
+
+#main-nav img {
+    width: 100%;
+    height: auto;
+}
+
+#main-nav ul {
+    padding: 0px;
+    max-width: 100%;
+}
+
+#main-nav li {
+    list-style-type: none;
+    padding: 15px 20px;
+    border: 1px solid rgb(88, 88, 88);
+    max-width: 100%;
+}
+
+#main-nav li:hover {
+    transition: 0.5s;
+    background-color: rgb(88, 88, 88);
+}
+
+#main-nav a {
+    color: white;
+    text-decoration: none;
+}
+
+#main-content table{
+    margin-left: auto;
+    margin-right: auto;
+    width:75%;
+    
+}
+#main-content table,tr,th{
+    border: 2px solid white;
+    border-collapse: collapse;
+    text-align: center;
+    
+}
+#main-content th,td{
+    height: 100px;
+    font-size: large;
+}
+#main-content{
+    text-align: center;
+}
+.btn {
+    outline: none;
+    color: black;
+    background-color: #17a2b8;
+    box-shadow: 0 0 0 0;
+    padding:20px;
+    
+  }
+  a {
+    color: #17a2b8;
+  }
+  .goback{
+    margin:25px;
+  }
+  .left {
+    position: relative;
+    left:45%;
+    margin: 15px;
+  }
+  .table{
+    padding: 10px;
+    
+  }
+  

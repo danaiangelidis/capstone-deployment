@@ -1,0 +1,62 @@
+<!--  Show the employee's information and allow editing. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Employee</title>
+    <link rel="stylesheet" href="../../static/css/employee_details.css">
+</head>
+<body>
+    <nav id="main-nav">
+        <a href="{% url 'home' %}"><img src="../../static/images/logo.png"></a>
+        <ul>
+            <li><a href="{% url 'calendar' %}">Calendar</a></li>
+            <li>Earnings</li>
+            <li><a href="{% url 'inventory' %}">Inventory</a></li>
+            <li><a href="{% url 'employee_list' %}">Employees</a></li>
+            <li><a href="{% url 'invoicing' %}">Invoices</a></li>
+            <li><a href="{% url 'pricing' %}">Pricing</a></li>
+            <li><a href="{% url 'settings/' %}">Settings</a></li>
+        </ul>
+    </nav>
+<main id="main-content">
+    <h1>Employee Details: {{ employee.name }}</h1>
+    <p>Email: {{ employee.email }}</p>
+    <p>Position: {{ employee.position }}</p>
+
+    <!-- Displaying Payroll Information -->
+    {% if payroll_info %}
+        <p>Salary: {{ payroll_info.salary }}</p>
+        <p>Pay Period: {{ payroll_info.pay_period }}</p>
+        <!-- Placeholder for Payroll Detail Link -->
+        <a href="{% url 'payroll_detail' payroll_info.id %}">View Payroll Details</a>
+    {% endif %}
+
+    <h2>Edit Bank Account Information</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Render the bank account field separately for custom styling or arrangement -->
+        <div class="form-group">
+            <label for="id_bank_account_info">Bank Account Information:</label>
+            {{ form.bank_account_info }}
+        </div>
+        <!-- Render the rest of the fields -->
+        <div class="form-group">
+            <label for="id_name">Name:</label>
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            <label for="id_email">Email:</label>
+            {{ form.email }}
+        </div>
+        <div class="form-group">
+            <label for="id_position">Position:</label>
+            {{ form.position }}
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save changes" class="add">
+        </div>
+    </form> 
+</main>
+</body>
+</html>

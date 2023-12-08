@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PitStopPro</title>
+        <link rel="stylesheet" href="../static/customPricing.css">
+        <script src="../static/customPricing.js"></script>
+    </head>
+    <body>
+        <nav id="main-nav">
+            <img src="../../static/assets/logo.png">
+            <ul>
+                <li><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li>Earnings</li>
+                <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'employee_list' %}">Employees</a></li>
+                <li><a href="{% url 'invoicing' %}">Invoices</a></li>
+                <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                <li><a href="{% url 'settings/' %}">Settings</a></li>
+            </ul>
+        </nav>
+        <main id="main-content">
+            <form id="form">
+                <h1>Pricing Estimate</h1>
+                <p>
+                    <label for="diagnosis">Diagnosis</label>
+                    <textarea id="diagnosis"></textarea>
+                </p>
+                <p>
+                    <label for="time">Estimated Working Time</label>
+                    <input type="number" id="time">
+                </p>
+                <p>
+                    <label for="cost">Estimated Total Cost</label>
+                    <input type="number" id="cost">
+                </p>
+                <a>
+                    <a id="show">Show</a>
+                </a>
+            </form>
+            <section id="showDetails" class="hidden modal">
+                <span id="close-x" class="close">&times;</span>
+                <section id="details"></section>
+            </section>
+        </main>
+    </body>
+</html>
