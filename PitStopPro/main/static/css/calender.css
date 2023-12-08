@@ -1,0 +1,60 @@
+#date
+{
+padding: 70px 25px;
+width: 1850px;
+background: #1abc9c;
+}
+#date ul 
+{
+    margin: 0;
+    padding: 0;
+}
+#date #month{
+    text-align: center;
+}
+#date ul li
+{
+    color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+#date #prev
+{
+    float:left;
+    padding-top: 10px;
+}
+#date #next
+{
+    float:right;
+    padding-top: 10px;
+}
+ul 
+{
+list-style-type:none;
+}
+
+table,th,td
+{
+border:2px solid black;
+border-collapse: collapse;
+}
+table{
+    width:1900px;
+    
+}
+table th
+{
+height: 50px;
+font-weight: bold;
+font-size: 20px;
+text-decoration: underline;
+}
+table td{
+    width:100px;
+    height: 100px;
+    vertical-align: top;
+    font-weight: bold;
+    font-size: 20px;
+}

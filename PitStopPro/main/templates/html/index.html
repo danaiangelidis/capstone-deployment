@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PitStopPro</title>
+        <link rel="stylesheet" href="../../static/css/index.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/images/logo.png"></a>
+            <ul>
+                <li><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li><a href="#">Earnings</a></li>
+                <li><a href="#">Inventory</a></li>
+                <li><a href="{% url 'invoicing' %}">Invoicing</a></li>
+                <li><a href="#">Payroll</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h1>Welcome to PitStopPro</h1>
+            <p>Please select a navigation item to begin.</p>
+        </main>
+    </body>
+</html>
