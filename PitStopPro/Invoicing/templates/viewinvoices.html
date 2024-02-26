@@ -3,6 +3,8 @@
     <head>
         <title>Invoicing</title>
         <link rel="stylesheet" href="../../static/css/viewinvoices.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="../static/viewinvoices.js"></script>
     </head>
     <body>
         <nav id="main-nav">
@@ -24,60 +26,58 @@
             </a>
         </section>
         <section id="invoices">
-        {% for invoice in invoices %}
+            {% for invoice in invoices %}
             <article class="invoice">
                 <div class="from">
-                    <h2>{{invoice.CompanyName}}</h2>
-                    <p>{{invoice.companyAddress}}, {{invoice.companyCity}}, {{invoice.companyState}}</p>
-                    <p>{{invoice.dateIssued}}</p>
+                    <h2 id="comName">{{invoice.CompanyName}}</h2>
+                    <p id="comAddress">{{invoice.companyAddress}}, {{invoice.companyCity}}, {{invoice.companyState}}</p>
+                    <p id="dateIssued">{{invoice.dateIssued}}</p>
                 </div>
                 <hr>
                 <div class="to">
-                    <h3>{{invoice.firstName}} {{invoice.lastName}}</h3>
-                    <p>{{invoice.address}}, {{invoice.city}}, {{invoice.state}}</p>
-                    <p>{{invoice.email}}</p>
-                    <p>Vehicle: {{invoice.color}} {{invoice.year}} {{invoice.make}} {{invoice.model}} {{invoice.type}}</p>
-                    <p>Plate Number: {{invoice.plateNumber}}</p>
+                    <h3 id="cusName">{{invoice.firstName}} {{invoice.lastName}}</h3>
+                    <p id="cusAddress">{{invoice.address}}, {{invoice.city}}, {{invoice.state}}</p>
+                    <p id="cusEmail">{{invoice.email}}</p>
+                    <p id="cusCar">Vehicle: {{invoice.color}} {{invoice.year}} {{invoice.make}} {{invoice.model}} {{invoice.type}}</p>
+                    <p id="cusPlate">Plate Number: {{invoice.plateNumber}}</p>
                 </div>
                 <table>
                     <thead>
-                        <tr>
-                            <th class="desc">Description</th>
-                            <th class="price">Price</th>
-                            <th class="qty">Quantity</th>
-                        </tr>
-                        <tr>
-                            <td class="desc">{{invoice.item1Desc}}</td>
-                            <td>${{invoice.item1Price}}</td>
-                            <td>{{invoice.item1Qty}}</td>
-                        </tr>
-                        <tr>
-                            <td class="desc">{{invoice.item2Desc}}</td>
-                            <td>${{invoice.item2Price}}</td>
-                            <td>{{invoice.item2Qty}}</td>
-                        </tr>
-                        <tr>
-                            <td class="desc">{{invoice.item3Desc}}</td>
-                            <td>${{invoice.item3Price}}</td>
-                            <td>{{invoice.item3Qty}}</td>
-                        </tr>
+                    <tr>
+                        <th class="desc">Description</th>
+                        <th class="price">Price</th>
+                        <th class="qty">Quantity</th>
+                    </tr>
+                    <tr>
+                        <td class="desc" id="desc1">{{invoice.item1Desc}}</td>
+                        <td id="price1">${{invoice.item1Price}}</td>
+                        <td id="qty1">{{invoice.item1Qty}}</td>
+                    </tr>
+                    <tr>
+                        <td class="desc" id="desc2">{{invoice.item2Desc}}</td>
+                        <td id="price2">${{invoice.item2Price}}</td>
+                        <td id="qty2">{{invoice.item2Qty}}</td>
+                    </tr>
+                    <tr>
+                        <td class="desc" id="desc3">{{invoice.item3Desc}}</td>
+                        <td id="price3">${{invoice.item3Price}}</td>
+                        <td id="qty3">{{invoice.item3Qty}}</td>
+                    </tr>
                     </thead>
                 </table>
                 <div class="totals">
-                    <p>Total labor: ${{invoice.totalLabor}}</p>
-                    <p>Total items: ${{invoice.totalItems}}</p>
+                    <p id="totalLabor">Total labor: ${{invoice.totalLabor}}</p>
+                    <p id='totalItems'>Total items: ${{invoice.totalItems}}</p>
                     <hr>
                     <p>Total before tax: ${{invoice.totalNoTax}}</p>
                     <p>Tax: {{invoice.Tax}}%</p>
                 </div>
                 <div class="subtotal">
-                    <h1>Subtotal: ${{invoice.totalPrice}}</h1>
+                    <h1 id="subtotal">Subtotal: ${{invoice.totalPrice}}</h1>
                 </div>
+                <p id="download-button">Download</p>
             </article>
-        {% endfor %}
-        </main>
-        <footer id="main-footer">
-            
-        </footer>
+            {% endfor %}
+        </section>
     </body>
 </html>
