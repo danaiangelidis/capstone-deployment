@@ -25,6 +25,8 @@ from Invoicing import views as invoiceViews
 from Authentication import views as authViews
 from userSettings import views as settingViews
 from Pricing import views as pricingViews
+from ContactUs import views as contactViews
+
 
 urlpatterns = [
     path("", authViews.signin, name = "login/"),
@@ -51,6 +53,8 @@ urlpatterns = [
     path('createinvoice/', invoiceViews.createInvoice, name='createinvoice'),
     path('invoicing/', invoiceViews.viewInvoices, name='invoicing'),
     path('pricing/', pricingViews.viewPricing, name='pricing'),
+    path('contactus/', contactViews.Contact,name="contact"),
+    path('earnings/', include('Earnings.urls')),
 ]
 
 if settings.DEBUG:

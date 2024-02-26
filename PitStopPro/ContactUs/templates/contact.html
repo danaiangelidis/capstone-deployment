@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PitStopPro</title>
+        <link rel="stylesheet" href="../../static/contact.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/assets/logo.png"></a>
+            <ul>
+                <li><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li>Earnings</li>
+                <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'employee_list' %}">Employees</a></li>
+                <li><a href="{% url 'invoicing' %}">Invoices</a></li>
+                <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                <li><a href="{% url 'settings/' %}">Settings</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h1>Contact Us</h1>
+            <p style="text-align: center;">Fill out the form and a member from our team will get back to you within 24 hours</p>
+            <div class ="top-banner">
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    <p>
+                    <label >First Name:</label>
+                    <br>
+                        {{ form.firstName }}
+                    </p>
+                    <p>
+                    <label >Last Name:</label>
+                    <br>
+                        {{ form.lastName }}
+                    </p>
+                    <p>
+                    <label>Email:</label>
+                    <br>
+                        {{form.email}}
+                    </p>
+                    <p>
+                    <label >Phone:</label>
+                    <br>
+                        {{form.number}}
+                    </p>
+                    <p>
+                    <label >Company Name:</label>
+                    <br>
+                        {{form.company}}
+                    </p>
+                    <p>
+                    <label >Message:</label>
+                    <br>
+                    <input class="messageBox" type = "text" placeholder = "500 Character Max" name = "message">
+                    </p>
+                    <button onclick="alert('Thank you for your input, We will get back to you within the next 24 hours (business day)')" type="submit">Submit</button>
+                </form>
+            
+                <div class="side-banner">
+                    <img style="width: 400px;" src="../static/assets/logo.png">
+                    <hr>
+                    <h3>Phone Number</h3>
+                    <span>(865)739-3829</span>
+                    <hr>
+                    <h3>Email</h3>
+                    <a href = "mailto: Pitstoppro@support.com">Pitstoppro@support.com</a>
+                    <hr>
+                    <h3>Office</h3>
+                    <address>123 Address Dr, Columbia SC 29378</address>
+                    <hr>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

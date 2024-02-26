@@ -9,12 +9,13 @@
             <img src="../../static/assets/logo.png">
             <ul>
                 <li><a href="{% url 'calendar' %}">Calendar</a></li>
-                <li>Earnings</li>
+                <li><a href="{% url 'earnings_view' 'monthly' %}">Earnings</a></li>
                 <li><a href="{% url 'inventory' %}">Inventory</a></li>
                 <li><a href="{% url 'employee_list' %}">Employees</a></li>
                 <li><a href="{% url 'invoicing' %}">Invoices</a></li>
                 <li><a href="{% url 'pricing' %}">Pricing</a></li>
                 <li><a href="{% url 'settings/' %}">Settings</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
             </ul>
         </nav>
         <main>

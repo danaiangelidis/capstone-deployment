@@ -1,0 +1,38 @@
+<!-- templates/earnings/earnings_page.html 
+<h1>Earnings Report</h1>
+<p>Total Earnings: {{ earnings.total_earnings|default:"0" }}</p>
+-->
+{% load static %} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Earnings Report</title>
+    <link rel="stylesheet" href="{% static 'css/employee_details.css' %}">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        .container { margin-top: 20px; }
+        .button { padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; }
+        .button:hover { background-color: #0056b3; }
+        .report { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Earnings Report</h1>
+        <div>
+            <a href="{% url 'earnings_view' 'weekly' %}" class="button">Weekly</a>
+            <a href="{% url 'earnings_view' 'monthly' %}" class="button">Monthly</a>
+            <a href="{% url 'earnings_view' 'quarterly' %}" class="button">Quarterly</a>
+        </div>
+        <div class="report">
+            <p>Total Earnings: {{ earnings.total_earnings|default:"0" }}</p>
+        </div>
+        <div>
+            <a href="{% url 'download_report' period %}" class="button">Download Report</a>
+        </div>
+    </div>
+</body>
+</html>

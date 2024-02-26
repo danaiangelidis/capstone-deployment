@@ -1,6 +1,10 @@
-from django.contrib import admin
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    # Path for viewing earnings by period
+    path('view/<str:period>/', views.earnings_view, name='earnings_view'),
+    
+    # Path for downloading the report
+    path('download/<str:period>/', views.download_report, name='download_report'),
 ]
