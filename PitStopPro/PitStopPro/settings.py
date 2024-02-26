@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "Home",
     "userSettings",
     "Pricing",
+    "ContactUs",
 ]
 
 MIDDLEWARE = [
