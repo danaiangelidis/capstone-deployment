@@ -9,7 +9,7 @@
             <a href="{% url 'home' %}"><img src="../../static/images/logo.png"></a>
             <ul>
                 <li><a href="{% url 'calendar' %}">Calendar</a></li>
-                <li><a href="#">Earnings</a></li>
+                <li><a href="{% url 'earnings_view' 'monthly' %}">Earnings</a></li>
                 <li><a href="{% url 'inventory' &}">Inventory</a></li>
                 <li><a href="{% url 'employee_list' %}">Employees</a></li>
                 <li><a href="{% url 'invoicing' %}">Invoices</a></li>
