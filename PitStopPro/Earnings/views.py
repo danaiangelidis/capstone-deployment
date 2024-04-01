@@ -32,7 +32,7 @@ def earnings_view(request, period):
 
     earnings = Transaction.objects.filter(date__gte=start_date).aggregate(total_earnings=Sum('amount'))['total_earnings']
 
-    return render(request, 'earnings/earnings_page.html', {
+    return render(request, 'Earnings/earnings_page.html', {
         'earnings': earnings, 
         'period': period  # Add this line to pass 'period' to your template
     })
