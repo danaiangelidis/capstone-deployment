@@ -76,6 +76,10 @@
                     <h1 id="subtotal">Subtotal: ${{invoice.totalPrice}}</h1>
                 </div>
                 <p id="download-button">Download</p>
+                <form action="{% url 'delete_invoice' invoice.id %}" method="post">
+                    {% csrf_token %}
+                    <p id="download-button">Delete</p>
+                </form>
             </article>
             {% endfor %}
         </section>

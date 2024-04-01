@@ -23,3 +23,11 @@ def viewInvoices(request):
     invoices = Jobs.objects.all()
     context = {'invoices' : invoices}
     return render(request, 'viewinvoices.html', context)
+
+def deleteInvoice(request, invoice_id):
+    invoice = get_object_or_404(Invoice, pk=invoice_id)
+    context = {'invoice': invoice}
+    if request.method == 'POST':
+        invoice.delete()
+        return redirect('view_invoices')
+    return render(request, 'view_invoices.html', context)

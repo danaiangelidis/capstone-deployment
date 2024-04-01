@@ -61,6 +61,7 @@ urlpatterns = [
             # INVOICING URLS
     path('createinvoice/', invoiceViews.createInvoice, name='createinvoice'),
     path('invoicing/', invoiceViews.viewInvoices, name='invoicing'),
+    path('invoices/<int:invoice_id>/delete/', invoiceViews.deleteInvoice, name='delete_invoice'),
             # PRICING CONTACTS AND EARNINGS URLS
     path('pricing/', pricingViews.viewPricing, name='pricing'),
     path('contactus/', contactViews.Contact,name="contact"),
