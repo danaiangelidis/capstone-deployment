@@ -1,5 +1,5 @@
 from django.db import models
-
+import uuid
 class Invoice(models.Model):
     # dateIssued = models.DateTimeField(auto_now_add=True)
 
@@ -16,6 +16,8 @@ class Invoice(models.Model):
     city = models.CharField(max_length=30)
     state = models.CharField(max_length=20)
     email = models.EmailField(max_length=50)
+    phoneNumber = models.CharField(max_length=10)
+    clientID = models.UUIDField(primary_key = True, default=uuid.uuid4,editable=False)
 
     # Vehicle Info
     type = models.CharField(max_length=30)
@@ -51,4 +53,4 @@ class Invoice(models.Model):
     totalNoTax = models.DecimalField(decimal_places=2, max_digits=1000)
     
     def __str__(self):
-        return 'Invoice #{}'.format(self.id) 
+        return 'Invoice {} {}'.format(self.firstName, self.lastName, self.clientID) 

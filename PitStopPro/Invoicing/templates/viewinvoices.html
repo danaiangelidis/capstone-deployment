@@ -4,24 +4,28 @@
         <title>Invoicing</title>
         <link rel="stylesheet" href="../../static/css/viewinvoices.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-        <script src="../static/viewinvoices.js"></script>
+        <script src="../static/invoicing.js"></script>
     </head>
     <body>
         <nav id="main-nav">
             <a href="{% url 'home' %}"><img src="../../static/images/logo.png"></a>
             <ul>
                 <li><a href="{% url 'calendar' %}">Calendar</a></li>
-                <li>Earnings</li>
-                <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'employee_list' %}">Earnings</a></li>
+                <li><a href="{% url 'inventory' &}">Inventory</a></li>
                 <li><a href="{% url 'employee_list' %}">Employees</a></li>
                 <li><a href="{% url 'invoicing' %}">Invoices</a></li>
                 <li><a href="{% url 'pricing' %}">Pricing</a></li>
                 <li><a href="{% url 'settings/' %}">Settings</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                <li><a href="{% url 'customerContact' %}">Customer Support</a></li>
+                <li><a href="{% url 'jobs' %}">Jobs</a></li>
+                <li><a href="{% url 'customers' %}">Rewards</a></li>
             </ul>
         </nav>
         <section id="title">
             <h1>Created Invoices</h1>
-            <a href="{% url 'createinvoice' %}">
+            <a href="{% url 'jobs' %}">
                 <button>+ Create New Invoice</button>
             </a>
         </section>
@@ -35,11 +39,12 @@
                 </div>
                 <hr>
                 <div class="to">
-                    <h3 id="cusName">{{invoice.firstName}} {{invoice.lastName}}</h3>
-                    <p id="cusAddress">{{invoice.address}}, {{invoice.city}}, {{invoice.state}}</p>
-                    <p id="cusEmail">{{invoice.email}}</p>
-                    <p id="cusCar">Vehicle: {{invoice.color}} {{invoice.year}} {{invoice.make}} {{invoice.model}} {{invoice.type}}</p>
-                    <p id="cusPlate">Plate Number: {{invoice.plateNumber}}</p>
+                    <h3 id="cusName">{{invoice.client.firstName}} {{invoice.client.lastName}}</h3>
+                    <p id="cusAddress">{{invoice.client.address}}, {{invoice.client.city}}, {{invoice.client.state}}</p>
+                    <p id="cusEmail">{{invoice.client.email}}</p>
+                    <p id="cusEmail">{{invoice.client.phoneNumber}}</p>
+                    <p id="cusCar">Vehicle: {{invoice.vehicle.year}} {{invoice.vehicle.make}} {{invoice.vehicle.model}} {{invoice.vehicle.type}}</p>
+                    <p id="cusPlate">Plate Number: {{invoice.vehicle.plateNumber}}</p>
                 </div>
                 <table>
                     <thead>
@@ -49,25 +54,20 @@
                         <th class="qty">Quantity</th>
                     </tr>
                     <tr>
-                        <td class="desc" id="desc1">{{invoice.item1Desc}}</td>
-                        <td id="price1">${{invoice.item1Price}}</td>
-                        <td id="qty1">{{invoice.item1Qty}}</td>
-                    </tr>
-                    <tr>
-                        <td class="desc" id="desc2">{{invoice.item2Desc}}</td>
-                        <td id="price2">${{invoice.item2Price}}</td>
-                        <td id="qty2">{{invoice.item2Qty}}</td>
-                    </tr>
-                    <tr>
-                        <td class="desc" id="desc3">{{invoice.item3Desc}}</td>
-                        <td id="price3">${{invoice.item3Price}}</td>
-                        <td id="qty3">{{invoice.item3Qty}}</td>
+                        {% for part in invoice.parts.all %}
+                        <td class="desc" id="desc1">{{part.description}}</td>
+                        <td id="price1">${{part.price}}</td>
+                        <td id="qty1">{{part.quantity}}</td>
+                        {% endfor %}
                     </tr>
                     </thead>
                 </table>
                 <div class="totals">
+                    {% for employee in invoice.employee.all %}
+                    <p id="totalLabor">Employee: {{employee.name}}</p>
                     <p id="totalLabor">Total labor: ${{invoice.totalLabor}}</p>
                     <p id='totalItems'>Total items: ${{invoice.totalItems}}</p>
+                    {% endfor %}
                     <hr>
                     <p>Total before tax: ${{invoice.totalNoTax}}</p>
                     <p>Tax: {{invoice.Tax}}%</p>

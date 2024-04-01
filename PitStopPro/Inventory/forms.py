@@ -1,5 +1,5 @@
 from django import forms
-from .models import Inventory
+from Jobs.models import Inventory
 from django.forms import ModelForm
 
 class InventoryForm(ModelForm):

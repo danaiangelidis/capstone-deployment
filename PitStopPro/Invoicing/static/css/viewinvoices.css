@@ -97,6 +97,17 @@ td {
     max-width: 80%;
 }
 
+/* Download Button */
+
+#download-button {
+    cursor: pointer;
+    text-decoration: underline transparent;
+}
+
+#download-button:hover {
+    text-decoration: underline white;
+}
+
 /* Button */
 
 button {
@@ -120,5 +131,22 @@ a {
 
 /* Media Query */
 
-@media only screen and (min-width: 800px) {
+@media only screen and (max-width: 1200px) {
+    #main-nav {
+        width: 100px;
+        max-width: 100px;
+    }
+
+    #main-nav li {
+        padding: 15px 15px;
+    }
+
+    #invoices {
+        display: block;
+        flex-wrap: wrap;
+    }
+    
+    .invoice {
+        width: 80%;
+    }
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PitStopPro</title>
+        <link rel="stylesheet" href="../../static/customerContact.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/assets/logo.png"></a>
+            <ul>
+                <li><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li><a href="{% url 'earnings_view' 'monthly' %}">Earnings</a></li>
+                <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'employee_list' %}">Employees</a></li>
+                <li><a href="{% url 'invoicing' %}">Invoices</a></li>
+                <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                <li><a href="{% url 'settings/' %}">Settings</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                <li><a href="{% url 'customerContact' %}">Customer Support</a></li>
+                <li><a href="{% url 'jobs' %}">Jobs</a></li>
+                <li><a href="{% url 'customers' %}">Rewards</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h1>Customer Support</h1>
+            <div class="messagebox">
+                <form method="POST">
+                    <h1>Message All Customers</h1>
+                    <hr>
+                    {% csrf_token %}
+                    <h2>
+                        <label>To: </label>
+                        <input type="text" name="phoneNumber" value="{{ clientNumber }}">
+                    </h2>
+                    <h2>
+                        <label>Message: </label>
+                        <textarea name="message" value="{{ message }}"></textarea>
+                    </h2>   
+                    <input type="submit" value="Send"/>
+                </form>
+                <div class="messages">
+                    <h1>Client Contact List</h1>
+                    <hr>
+                    <a id="messageall" href="{% url 'sendtoall' %}">Message All</a>
+                    {% for client in clients %}
+                        <div class="clientlist">
+                            <a href="{% url 'sendMessage' client.clientID %}"><strong>{{client.firstName}} {{client.lastName}}</strong> - {{client.phoneNumber}}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

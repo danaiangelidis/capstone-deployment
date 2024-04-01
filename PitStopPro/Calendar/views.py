@@ -12,12 +12,6 @@ from .forms import EventForm
 # Create your views here.
 
 
-def index(request):
-    return HttpResponse('hello')
-
-
-
-
 class CalendarView(generic.ListView):
     model = Event
     template_name = 'calendar.html'

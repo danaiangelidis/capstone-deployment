@@ -52,62 +52,87 @@ body {
 
 /* Main Content */
 
-/* Media Query */
+.btn,
+.backbtn {
+  margin: 20px auto;
+  display: block;
+  background-color: rgb(36, 36, 36);
+  color: white;
+  border: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  box-shadow: 0px 0px 5px rgb(37, 37, 37);
+  width: 20%;
+} 
+
+.backbtn {
+  width: 110px;
+}
+
+.btn:hover,
+.backbtn:hover {
+  background-color: rgb(69, 69, 69);
+  cursor: pointer;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.left {
+  position: relative;
+  left: 50%;
+  margin: 15px;
+}
+
+.right {
+  position: relative;
+  left: 50%;
+  margin: 15px;
+}
 
 
+.goback {
+  margin: 25px;
+}
 
+.form-table {
+  margin: auto;
+}
 
-a {
-    color: #17a2b8;
-  }
-  .left {
-    position: relative;
-    left:50%;
-    margin: 15px;
-  }
-  
-  .right {
-    position: relative;
-    left: 50%;
-    margin: 15px;
-  }
-  
-  .btn {
-    outline: none;
-    color: black;
-    background-color: #17a2b8;
-    box-shadow: 0 0 0 0;
+.form-table input, .form-table select, .form-table textarea {
+  border-radius: 5px;
+  color:white;
+  border: 2px solid white;
+  outline: none;
+  background: none;
+  padding: 10px;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.form-table label {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 1200px) {
+  #main-nav {
+      width: 100px;
+      max-width: 100px;
   }
 
-  .backbutton{
-    outline: none;
-    color: black;
-    background-color: #17a2b8;
-    border: 2px solid white;
-    box-shadow: 0 0 0 0;
+  #main-nav li {
+      padding: 15px 15px;
   }
-  .goback{
-    
-    margin:25px;
+
+  #form {
+    padding-left: 130px;
   }
-  
-  .form-table {
-    margin: auto;
-    
+
+  .form-table input {
+    width: 200px;
   }
-  
-  
-  .form-table input, .form-table select, .form-table textarea {
-    border-radius: 5px;
-    color:white;
-    border: 2px solid white;
-    outline: none;
-    background: none;
-    padding: 10px;
-    width: 300px;
-    margin-bottom: 10px;
-  }
-  .form-table label{
-   font-size: 20px;
-   margin-right: 10px;
-  }
+}

@@ -9,7 +9,7 @@ from .models import Employee, Payroll
 class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
-        fields = ['name', 'email', 'position', 'bank_account_info']
+        fields = '__all__'
 
 class PayrollForm(forms.ModelForm):
     class Meta:

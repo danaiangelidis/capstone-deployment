@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Add Client</title>
+        <link rel="stylesheet" href="../../static/addclient.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/images/logo.png"></a>
+            <ul>
+                <li><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li><a href="{% url 'earnings_view' 'monthly' %}">Earnings</a></li>
+                <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'employee_list' %}">Employees</a></li>
+                <li><a href="{% url 'invoicing' %}">Invoices</a></li>
+                <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                <li><a href="{% url 'settings/' %}">Settings</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                <li><a href="{% url 'customerContact' %}">Customer Support</a></li>
+                <li><a href="{% url 'jobs' %}">Jobs</a></li>
+                <li><a href="{% url 'customers' %}">Rewards</a></li>
+            </ul>
+        </nav>
+        <main id="main-content">
+            <form method="POST" action="{% url 'addclient' %}">
+                <h1>Add Client</h1>
+                {% csrf_token %}
+                <section id="client-info">
+                    
+                    <h3>Client Information</h3>
+                    <p>
+                        
+                        {{  clientform }}
+                   </p>
+                   <hr>
+                   <p>
+                    
+                    {{  vehicleform }}
+               </p>
+                    
+                    
+                </section>
+                <hr>
+                
+                
+                <input type="submit" value="Submit Client" class="btn btn-secondary">
+            </form>
+        </main>
+        <footer id="main-footer">
+            <a href="{% url 'jobs' %}"><p>View All jobs</p></a>
+        </footer>
+    </body>
+</html>

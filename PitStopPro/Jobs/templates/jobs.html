@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PitStopPro</title>
+        <link rel="stylesheet" href="../../static/jobs.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/assets/logo.png"></a>
+            <ul>
+                <li><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li><a href="{% url 'earnings_view' 'monthly' %}">Earnings</a></li>
+                <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'employee_list' %}">Employees</a></li>
+                <li><a href="{% url 'invoicing' %}">Invoices</a></li>
+                <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                <li><a href="{% url 'settings/' %}">Settings</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                <li><a href="{% url 'customerContact' %}">Customer Support</a></li>
+                <li><a href="{% url 'jobs' %}">Jobs</a></li>
+                <li><a href="{% url 'customers' %}">Rewards</a></li>
+            </ul>
+        </nav>
+        <main>
+        <section id="title">
+            <h1>Created Jobs</h1>
+            <a href="{% url 'createjobs' %}">
+                <button>+ Create New Job</button>
+            </a>
+        </section>
+        <section id="invoices">
+            {% for job in jobs %}
+            <article class="invoice">
+                <hr>
+                <div class="to">
+                    <h2 id="cusName">{{job}}</h2>
+                    {% for type in job.type.all %}
+                    <h5>{{ type }}</h5>
+                    {%endfor%}
+                    <a href="{% url 'invoicing' %}">
+                        <button>+ Create Invoice</button>
+                    </a>
+                <hr>
+            </article>
+            {% endfor %}
+        </section>
+    </main>
+    </body>
+</html>

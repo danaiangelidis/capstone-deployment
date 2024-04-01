@@ -33,7 +33,7 @@ CSRF_TRUSTED_ORIGINS = ['https://capstone-deployment-production.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
+        "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     "userSettings",
     "Pricing",
     "ContactUs",
+    "CustomerContact",
+    "Jobs",
+    "Customers",
 ]
 
 MIDDLEWARE = [

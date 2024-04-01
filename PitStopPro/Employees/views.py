@@ -1,8 +1,10 @@
 # Create your views here.
 # views.py
+from http.client import HTTPResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
-from .models import Employee, Payroll
+from .models import Payroll
+from Jobs.models import Employee
 from .forms import EmployeeForm, PayrollForm
 
 def employee_list(request):
@@ -27,6 +29,10 @@ def delete_employee(request, employee_id):
 def employee_detail(request, employee_id):
     employee = get_object_or_404(Employee, pk=employee_id)
     payroll_info = Payroll.objects.filter(employee=employee).first() # Get the associated payroll info
+    
+    if not employee_id:
+        return HTTPResponse("Invalid Employee ID")
+    
     if request.method == 'POST':
         form = EmployeeForm(request.POST, instance=employee)
         if form.is_valid():

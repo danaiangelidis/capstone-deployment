@@ -68,6 +68,7 @@ form h1 {
 label,
 input {
     display: inline-block;
+
 }
 
 label {
@@ -76,9 +77,9 @@ label {
     padding: 5px;
 }
 
-input,
+.messagebox input,
 textarea {
-    width: 200px;
+    width: 2000px;
     background-color: rgb(88, 88, 88);
     border: none;
     border-radius: 5px;
