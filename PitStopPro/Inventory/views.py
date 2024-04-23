@@ -4,8 +4,10 @@ from django.urls import reverse
     #IMMPORTED MODELS
 from Jobs.models import Inventory
 from .forms import InventoryForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def inventory(request,inventory_id=None):
     instance = Inventory()
     if inventory_id:
@@ -18,7 +20,7 @@ def inventory(request,inventory_id=None):
             form.save()
     all_inventory = Inventory.objects.all
     return render(request, "html/inventory.html",{'all':all_inventory})
-
+@login_required
 def new_inventory(request,inventory_id=None):
     instance = Inventory()
     if inventory_id:
@@ -32,7 +34,7 @@ def new_inventory(request,inventory_id=None):
             form.save()
             return HttpResponseRedirect(reverse('inventory'))
     return render(request, "html/new_inventory.html",{'form':form})
-
+@login_required
 def delete_inventory(request,inventory_id=None):
     instance = Inventory()
     if inventory_id:

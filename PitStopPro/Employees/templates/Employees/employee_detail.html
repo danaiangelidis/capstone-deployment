@@ -3,64 +3,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Employee</title>
+    <title>PitStopPro</title>
     <link rel="stylesheet" href="../../static/css/employee_details.css">
 </head>
 <body>
     <nav id="main-nav">
         <a href="{% url 'home' %}"><img src="../../static/images/logo.png"></a>
         <ul>
-            <li><a href="{% url 'calendar' %}">Calendar</a></li>
-            <li><a href="{% url 'earnings_view' 'monthly' %}">Earnings</a></li>
-            <li><a href="{% url 'inventory' %}">Inventory</a></li>
-            <li><a href="{% url 'employee_list' %}">Employees</a></li>
-            <li><a href="{% url 'invoicing' %}">Invoices</a></li>
-            <li><a href="{% url 'pricing' %}">Pricing</a></li>
-            <li><a href="{% url 'settings/' %}">Settings</a></li>
-            <li><a href="{% url 'contact' %}">Contact Us</a></li>
-            <li><a href="{% url 'customerContact' %}">Customer Support</a></li>
-            <li><a href="{% url 'jobs' %}">Jobs</a></li>
-            <li><a href="{% url 'customers' %}">Rewards</a></li>
+            <a href="{% url 'calendar' %}"><li>Calendar</li></a>
+            <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
+            <a href="{% url 'inventory' %}"><li>Inventory</li></a>
+            <a href="{% url 'employee_list' %}"><li>Employees</li></a>
+            <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
+            <a href="{% url 'pricing' %}"><li>Pricing</li></a>
+            <a href="{% url 'contact' %}"><li>Contact Us</li></a>
+            <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
+            <a href="{% url 'jobs' %}"><li>Jobs</li></a>
+            <a href="{% url 'customers' %}"><li>Rewards</li></a>
+            <a href="{% url 'settings/' %}"><li>Log Out</li></a>
         </ul>
     </nav>
-<main id="main-content">
-    <h1>Employee Details: {{ employee.name }}</h1>
-    <p>Email: {{ employee.email }}</p>
-    <p>Position: {{ employee.position }}</p>
+    <main id="main-content">
+        <h1>Employee Details: {{ employee.name }}</h1>
+        <p>Email: {{ employee.email }}</p>
+        <p>Position: {{ employee.position }}</p>
 
-    <!-- Displaying Payroll Information -->
-    {% if payroll_info %}
-        <p>Salary: {{ payroll_info.salary }}</p>
-        <p>Pay Period: {{ payroll_info.pay_period }}</p>
-        <!-- Placeholder for Payroll Detail Link -->
-        <a href="{% url 'payroll_detail' payroll_info.id %}">View Payroll Details</a>
-    {% endif %}
+        <!-- Displaying Payroll Information -->
+        {% if payroll_info %}
+            <p>Salary: {{ payroll_info.salary }}</p>
+            <p>Pay Period: {{ payroll_info.pay_period }}</p>
+            <!-- Placeholder for Payroll Detail Link -->
+            <a href="{% url 'payroll_detail' payroll_info.id %}">View Payroll Details</a>
+        {% endif %}
 
-    <h2>Edit Bank Account Information</h2>
-    <form method="post">
-        {% csrf_token %}
-        <!-- Render the bank account field separately for custom styling or arrangement -->
-        <div class="form-group">
-            <label for="id_bank_account_info">Bank Account Information:</label>
-            {{ form.bank_account_info }}
-        </div>
-        <!-- Render the rest of the fields -->
-        <div class="form-group">
-            <label for="id_name">Name:</label>
-            {{ form.name }}
-        </div>
-        <div class="form-group">
-            <label for="id_email">Email:</label>
-            {{ form.email }}
-        </div>
-        <div class="form-group">
-            <label for="id_position">Position:</label>
-            {{ form.position }}
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Save changes" class="add">
-        </div>
-    </form> 
-</main>
+        <h2>Edit Bank Account Information</h2>
+        <form method="post">
+            {% csrf_token %}
+            <!-- Render the bank account field separately for custom styling or arrangement -->
+            <div class="form-group">
+                <label for="id_bank_account_info">Bank Account Information:</label>
+                {{ form.bank_account_info }}
+            </div>
+            <!-- Render the rest of the fields -->
+            <div class="form-group">
+                <label for="id_name">Name:</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="id_position">Position:</label>
+                {{ form.position }}
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save Changes" class="add">
+            </div>
+        </form> 
+    </main>
 </body>
 </html>

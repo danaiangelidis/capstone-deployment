@@ -20,6 +20,11 @@ body {
     box-shadow: 2px 0px 5px rgb(37, 37, 37);
     overflow: hidden;
     max-width: 15%;
+    overflow-y: auto;
+}
+
+#main-nav::-webkit-scrollbar {
+    display: none;
 }
 
 #main-nav img {
@@ -51,10 +56,18 @@ body {
 
 /* Main Content */
 
+#title {
+    margin-left: 60px;
+}
+
+#title h1 {
+    text-align: center;
+}
+
 #main-content table{
     margin-left: auto;
     margin-right: auto;
-    width:75%;
+    width: 75%;
 }
 
 #main-content table, tr, th{
@@ -66,7 +79,6 @@ body {
 
 #main-content th, td{
     height: 100px;
-    font-size: large;
     padding: 20px;
 }
 
@@ -83,6 +95,7 @@ body {
     font-weight: bold;
     padding: 10px 20px;
     box-shadow: 0px 0px 5px rgb(37, 37, 37);
+    text-align: center;
 } 
 
 .btn:hover {
@@ -92,7 +105,7 @@ body {
 }
 
 .btn-info {
-    width: 15%;
+    width: 10%;
 }
 
 a {
@@ -118,6 +131,47 @@ a:hover {
     padding: 10px;
 }
 
+/* Modal Dialog */
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    overflow-y: auto;
+    position: fixed;
+    z-index: 1000;
+    left: 25%;
+    top: 5%;
+    width: 50%;
+    height: 25%;
+    max-height: 70%;
+    padding: 20px;
+    background-color: rgb(69, 69, 69);
+    box-shadow: 0px 0px 10px rgb(36, 36, 36);
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 0px 5px;
+}
+
+.close:hover {
+    color: rgb(110, 110, 110);
+    cursor: pointer;
+}
+
+#buttons {
+    display: flex;
+}
+
+#buttons button {
+    margin-right: 20px;
+}
+
 /* Media Query */
 
 @media only screen and (max-width: 1200px) {
@@ -131,7 +185,7 @@ a:hover {
     }
 
     .btn-info {
-        width: 25%;
+        width: 20%;
     }
 
     #main-content {
@@ -144,6 +198,10 @@ a:hover {
 
     .table {
         width: 80%;
+    }
+    
+    .modal {
+        height: 32%;
     }
 }
   

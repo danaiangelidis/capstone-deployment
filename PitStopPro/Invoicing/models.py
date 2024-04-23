@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 class Invoice(models.Model):
     # dateIssued = models.DateTimeField(auto_now_add=True)
-
+    
     # Company Info
     CompanyName = "Automotive Company"
     companyAddress = "123 Address Line Drive"

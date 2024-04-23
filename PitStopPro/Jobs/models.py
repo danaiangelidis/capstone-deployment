@@ -25,9 +25,11 @@ class Vehicle(models.Model):
     year = models.CharField(max_length=30)
     plateNumber = models.CharField(max_length=30)
     owner = models.ForeignKey(Client, blank=True, null=True,on_delete=models.CASCADE)
+    
 
     def __str__(self):
-        return '{} {}'.format(self.make, self.model) 
+        
+        return '{} {} {}'.format(self.owner ,self.make, self.model)
 # class Inventory(models.Model):
 #     stockNumber = models.CharField(max_length=200)
 #     quantity = models.IntegerField()
@@ -54,19 +56,23 @@ class Employee(models.Model):
     employeeID = models.UUIDField(primary_key = True, default=uuid.uuid4,editable=False)
     
     def __str__(self):
-        return 'Staff: {} {}'.format(self.name, self.employeeID) 
+        return 'Staff: {}'.format(self.name) 
     
 class Jobs(models.Model):
     client = models.ForeignKey(Client,blank=True,null=True,on_delete=models.PROTECT)
     parts = models.ManyToManyField(Inventory, blank=True)
+    numPart = models.IntegerField(default=0)
     type = models.ManyToManyField(Diagnosis, blank=True)
     employee = models.ManyToManyField(Employee, blank=True)
     vehicle = models.ForeignKey(Vehicle,blank=True,null=True,on_delete=models.PROTECT)
     
     def __str__(self):
-        return 'Job: {} {} '.format(self.vehicle, self.client) 
+        return '{} {} '.format(self.vehicle, self.client) 
     
 class Invoice(models.Model):
     invoice = models.ManyToManyField(Jobs, blank=True) 
+    
+
+    
     
     

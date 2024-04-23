@@ -1,43 +1,37 @@
 <!DOCTYPE html>
+{% load mathfilters %}
 <html lang="en">
     <head>
-        <title>Invoicing</title>
+        <title>PitStopPro</title>
         <link rel="stylesheet" href="../../static/css/viewinvoices.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-        <script src="../static/invoicing.js"></script>
     </head>
     <body>
         <nav id="main-nav">
             <a href="{% url 'home' %}"><img src="../../static/images/logo.png"></a>
             <ul>
-                <li><a href="{% url 'calendar' %}">Calendar</a></li>
-                <li><a href="{% url 'earnings_view' 'monthly' %}">Earnings</a></li>
-                <li><a href="{% url 'inventory' &}">Inventory</a></li>
-                <li><a href="{% url 'employee_list' %}">Employees</a></li>
-                <li><a href="{% url 'invoicing' %}">Invoices</a></li>
-                <li><a href="{% url 'pricing' %}">Pricing</a></li>
-                <li><a href="{% url 'settings/' %}">Settings</a></li>
-                <li><a href="{% url 'contact' %}">Contact Us</a></li>
-                <li><a href="{% url 'customerContact' %}">Customer Support</a></li>
-                <li><a href="{% url 'jobs' %}">Jobs</a></li>
-                <li><a href="{% url 'customers' %}">Rewards</a></li>
+                <a href="{% url 'calendar' %}"><li>Calendar</li></a>
+                <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
+                <a href="{% url 'inventory' %}"><li>Inventory</li></a>
+                <a href="{% url 'employee_list' %}"><li>Employees</li></a>
+                <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
+                <a href="{% url 'pricing' %}"><li>Pricing</li></a>
+                <a href="{% url 'contact' %}"><li>Contact Us</li></a>
+                <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
+                <a href="{% url 'jobs' %}"><li>Jobs</li></a>
+                <a href="{% url 'customers' %}"><li>Rewards</li></a>
+                <a href="{% url 'settings/' %}"><li>Log Out</li></a>
             </ul>
         </nav>
         <section id="title">
             <h1>Created Invoices</h1>
             <a href="{% url 'jobs' %}">
-                <button>+ Create New Invoice</button>
+                <button>Create New Invoice</button>
             </a>
         </section>
         <section id="invoices">
             {% for invoice in invoices %}
             <article class="invoice">
-                <div class="from">
-                    <h2 id="comName">{{invoice.CompanyName}}</h2>
-                    <p id="comAddress">{{invoice.companyAddress}}, {{invoice.companyCity}}, {{invoice.companyState}}</p>
-                    <p id="dateIssued">{{invoice.dateIssued}}</p>
-                </div>
-                <hr>
                 <div class="to">
                     <h3 id="cusName">{{invoice.client.firstName}} {{invoice.client.lastName}}</h3>
                     <p id="cusAddress">{{invoice.client.address}}, {{invoice.client.city}}, {{invoice.client.state}}</p>
@@ -53,34 +47,74 @@
                         <th class="price">Price</th>
                         <th class="qty">Quantity</th>
                     </tr>
-                    <tr>
                         {% for part in invoice.parts.all %}
-                        <td class="desc" id="desc1">{{part.description}}</td>
-                        <td id="price1">${{part.price}}</td>
-                        <td id="qty1">{{part.quantity}}</td>
+                        <tr>
+                            <td class="desc" id="desc1">{{part.partName}}  - {{part.description}}</td>
+                            <td id="price1">${{part.price}}</td>
+                            <td id="qty1">{{invoice.numPart}}</td>
+                        </tr>
                         {% endfor %}
-                    </tr>
                     </thead>
                 </table>
                 <div class="totals">
                     {% for employee in invoice.employee.all %}
                     <p id="totalLabor">Employee: {{employee.name}}</p>
-                    <p id="totalLabor">Total labor: ${{invoice.totalLabor}}</p>
-                    <p id='totalItems'>Total items: ${{invoice.totalItems}}</p>
+                    {% endfor %}
+                    {% for rate in invoice.type.all %}
+                    <p id="totalLabor">Total labor: ${{rate.laborRate}}</p>
+                    <p id="totalLabor">Total Labor Time: {{rate.est_time}} hour</p>
+                    {% endfor %}
+                    {% for part in invoice.parts.all %}
+                    <p id='totalItems'>Total Items: ${% widthratio part.price 1 invoice.numPart  %}</p>
                     {% endfor %}
                     <hr>
-                    <p>Total before tax: ${{invoice.totalNoTax}}</p>
-                    <p>Tax: {{invoice.Tax}}%</p>
+
+                    {% for rate in invoice.type.all %}
+                    {% with total_items=0 %}
+                    {% with subtotal=0 %}
+                    {% with total=0 %}
+                    {% with tax=0 %}
+                    {% with laborCost=0 %}
+                        {% for part in invoice.parts.all %}
+                            {% with item_total=part.price|mul:invoice.numPart %}
+                            {% with laborCost=rate.laborRate|mul:rate.est_time %}
+                            {% with subtotal=laborCost|add:item_total %}
+                            {% with tax=subtotal|mul:0.06 %}
+                            {% with total=subtotal|add:tax %}
+                            <p>Total before tax: ${{ subtotal }}</p>
+                            <p>Tax: ${{ tax }}</p>   
+                        
+                        <div class="subtotal">
+                            <h1 id="subtotal">Subtotal: ${{total}}</h1>
+                        </div>
+                            {% endwith %}
+                            {% endwith %}
+                            {% endwith %}
+                            {% endwith %}
+                            {% endwith %}
+                        {% endfor %}
+                        {% endwith %}
+                        {% endwith %}
+                        {% endwith %}
+                        {% endwith %}
+                    {% endwith %}
+                {% endfor %}
                 </div>
-                <div class="subtotal">
-                    <h1 id="subtotal">Subtotal: ${{invoice.totalPrice}}</h1>
+
+                <div id="buttons">
+                    <a href="{% url 'download_invoice' invoice.id %}"><button>Download</button></a>
+                    <a id="delete-button" onclick="document.getElementById('are-you-sure-{{invoice.id}}').classList.remove('hidden')"><button>Delete</button></a>
                 </div>
-                <p id="download-button">Download</p>
-                <form action="{% url 'delete_invoice' invoice.id %}" method="post">
-                    {% csrf_token %}
-                    <p id="download-button">Delete</p>
-                </form>
             </article>
+            <div id="are-you-sure-{{invoice.id}}" class="hidden modal">
+                <span id="close-ays" class="close" onclick="document.getElementById('are-you-sure-{{invoice.id}}').classList.add('hidden')">&times;</span>
+                <h2>Hang on!</h2>
+                <p>Are you sure you want to delete this invoice? Deleting an invoice will also delete the job associated with it.</p>
+                <div id="buttons">
+                    <a id="ays-yes" href="{% url 'delete_invoice' invoice.id %}"><button>Yes</button></a>
+                    <a id="ays-no"><button onclick="document.getElementById('are-you-sure-{{invoice.id}}').classList.add('hidden')">No</button></a>
+                </div>
+            </div>
             {% endfor %}
         </section>
     </body>

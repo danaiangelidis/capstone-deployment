@@ -10,24 +10,24 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
   <!-- {% load static %} -->
   <link rel="stylesheet" type="text/css" href="/static/css/event_style.css">
-  <title>Django Calendar App</title>
+  <title>PitStopPro</title>
 
 </head>
 <body>
     <nav id="main-nav">
         <a href="{% url 'home' %}"><img src="../../../static/assets/logo.png"></a>
         <ul>
-          <li><a href="{% url 'calendar' %}">Calendar</a></li>
-          <li><a href="{% url 'earnings_view' 'monthly' %}">Earnings</a></li>
-          <li><a href="{% url 'inventory' %}">Inventory</a></li>
-          <li><a href="{% url 'employee_list' %}">Employees</a></li>
-          <li><a href="{% url 'invoicing' %}">Invoices</a></li>
-          <li><a href="{% url 'pricing' %}">Pricing</a></li>
-          <li><a href="{% url 'settings/' %}">Settings</a></li>
-          <li><a href="{% url 'contact' %}">Contact Us</a></li>
-          <li><a href="{% url 'customerContact' %}">Customer Support</a></li>
-          <li><a href="{% url 'jobs' %}">Jobs</a></li>
-          <li><a href="{% url 'customers' %}">Rewards</a></li>
+          <a href="{% url 'calendar' %}"><li>Calendar</li></a>
+          <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
+          <a href="{% url 'inventory' %}"><li>Inventory</li></a>
+          <a href="{% url 'employee_list' %}"><li>Employees</li></a>
+          <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
+          <a href="{% url 'pricing' %}"><li>Pricing</li></a>
+          <a href="{% url 'contact' %}"><li>Contact Us</li></a>
+          <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
+          <a href="{% url 'jobs' %}"><li>Jobs</li></a>
+          <a href="{% url 'customers' %}"><li>Rewards</li></a>
+          <a href="{% url 'settings/' %}"><li>Log Out</li></a>
         </ul>
     </nav>
     {% block content %}

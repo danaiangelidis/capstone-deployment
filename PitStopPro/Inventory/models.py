@@ -7,7 +7,7 @@ class Inventory(models.Model):
     description = models.CharField(max_length=200)
     type = models.CharField(max_length=200)
     partName = models.CharField(max_length=200)
-    price = models.IntegerField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
 
 
     @property
@@ -15,6 +15,9 @@ class Inventory(models.Model):
         url = reverse('inventory_edit',args=(self.id,))
         return f'<a href="{url}"> {self.stockNumber}</a>'
 
+    def updateNum(self,num):
+        self.quantity -= num
+        self.save()
 
     def __str__(self):
-        return "Inventory Query #{}".format(self.id)
+        return "{}: {}".format(self.type,self.partName)

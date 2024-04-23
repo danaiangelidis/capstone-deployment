@@ -6,31 +6,60 @@
         <link rel = "stylesheet" href="../../static/signup.css">
     </head>
     <body>
-        <img src = "../../static/assets/logo.png" alt = "logo">
+        <img src = "../../static/assets/logo2.png" alt = "logo">
         <div>
             <h1>Sign Up</h1>
+            {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+             {% endif %}
                 <form method = "POST" action = "{% url 'signup/' %}">
                 {%csrf_token%}    
                     <label>First Name</label>
-                    <input type = "text" placeholder = "first name" name = "fname">
+                    <input type = "text" placeholder = "First Name" name = "fname" required>
                     <label>Last Name</label>
-                    <input type = "text" placeholder = "last name" name = "lname">
+                    <input type = "text" placeholder = "Last Name" name = "lname" required>
                     <label>Business Name</label>
-                    <input type = "text" placeholder = "buisness name" name = "bname">
+                    <input type = "text" placeholder = "Buisness Name" name = "bname">
                     <label>Email</label>
-                    <input type = "text" placeholder = "email" name = "email">
+                    <input type="email" name="email" placeholder = "Email" required>
                     <label>Phone Number</label>
-                    <input type = "text" placeholder = "phone number" name = "phone">
+                    <input type="tel" name="phonenum" pattern="[0-9]{10}" placeholder = "123 456 7890"required>
                     <label>Password</label>
-                    <input type = "text" placeholder = "password"  name = "password">
+                    <input type = "password" placeholder = "Password"  name = "password" required >
+
+                    <ul id="password-criteria">
+                        <li id="length-criterion">Password should be at least 8 characters long</li>
+                        <li id="uppercase-criterion">Password should contain at least one uppercase letter</li>
+                        <li id="number-criterion">Password should contain at least one number</li>
+                    </ul>
+                
                     <label>Confirm Password</label>
-                    <input type = "text" placeholder = "password confirm" name = "pass2">
+                    <input type = "password" placeholder = "Confirm Password" name = "pass2" required>
                     <input type = "submit" value = "Create Account"/>
                 </form>
-                <p>Already have an account? <a href = "{% url 'login/'%}">Login</a></p>
+                <p>Already have an account? <a href = "{% url 'login/'%}" id="log-in">Log In</a></p>
             <p>By signing up you agree to PitStopPro's <br>
-            <a href = "#">Terms and Conditions</a> and <a href = #>Privacy Policy</a>
+            <a href = "{% url 'terms-and-conditions'%}">Terms and Conditions</a> and <a href = "{% url 'privacy-policy'%}">Privacy Policy</a>
             </p>
         </div>
+        <script>
+         document.addEventListener('DOMContentLoaded', function() {
+       var passwordInput = document.querySelector('input[name="password"]');
+       var lengthCriterion = document.getElementById('length-criterion');
+       var uppercaseCriterion = document.getElementById('uppercase-criterion');
+       var numberCriterion = document.getElementById('number-criterion');
+
+       passwordInput.addEventListener('input', function() {
+           var password = passwordInput.value;
+           updateCriteria(password);
+       });
+
+       function updateCriteria(password) {
+           lengthCriterion.classList.toggle('met', password.length >= 8);
+           uppercaseCriterion.classList.toggle('met', /[A-Z]/.test(password));
+           numberCriterion.classList.toggle('met', /[0-9]/.test(password));
+       }
+   });
+            </script>
     </body>
 </html>
