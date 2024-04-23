@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from Jobs.models import Jobs
-from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
-@login_required
 def Customers(request):
     customers = Jobs.objects.all()
     name_counts = {}

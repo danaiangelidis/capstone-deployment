@@ -6,7 +6,7 @@ body {
     font-weight: lighter;
     color: white;
 }
-  
+
 /* Main Navigation */
 
 #main-nav {
@@ -21,11 +21,6 @@ body {
     box-shadow: 2px 0px 5px rgb(37, 37, 37);
     overflow: hidden;
     max-width: 15%;
-    overflow-y: auto;
-}
-
-#main-nav::-webkit-scrollbar {
-    display: none;
 }
 
 #main-nav img {
@@ -56,11 +51,11 @@ body {
 }
 
 /* Main Content */
-
 main {
-    width: 60%;
+    width: 90%;
     margin: auto;
-    padding-left: 100px;
+    padding-left: 120px;
+    padding-top: 15%;
 }
 
 main p {
@@ -70,15 +65,7 @@ main p {
 
 main h1 {
     text-align: center;
-}
-
-a {
-    color: white;
-    text-decoration: none;
-}
-
-a:hover {
-    color: rgb(133, 133, 133);;
+    color: red;
 }
 
 /* Form */
@@ -96,80 +83,16 @@ input {
 }
 
 label {
-    width: 100px;
-    text-align: right;
+    width: 200px;
+    text-align: left;
     padding: 5px;
-}
-
-input {
-    width: 300px;
-    background-color: rgb(88, 88, 88);
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-    margin: 5px;
 }
 
 .helptext {
     display: none;
 }
 
-/* Button */
-
-button,
-.button {
-    margin: 20px auto;
-    display: block;
-    background-color: rgb(36, 36, 36);
-    color: white;
-    border: none;
-    font-weight: bold;
-    padding: 10px 20px;
-    box-shadow: 0px 0px 5px rgb(37, 37, 37);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 14px;
-} 
-
-button:hover,
-.button:hover {
-    background-color: rgb(69, 69, 69);
-    cursor: pointer;
-}
-
-.button {
-    width: 30px;
-    margin: 10px 0px;
-    margin-right: 10px;
-}
-
-.delete {
-    margin: 10px 0px;
-}
-
-.buttons {
-    display: flex;
-}
-
 /* Media Query */
 
-@media only screen and (max-width: 1200px) {
-    #main-nav {
-        width: 100px;
-        max-width: 100px;
-    }
-
-    #main-nav li {
-        padding: 15px 15px;
-    }
-
-    label {
-        text-align: left;
-        width: 50px;
-    }
-
-    input {
-        width: 200px;
-    }
+@media only screen and (min-width: 800px) {
 }

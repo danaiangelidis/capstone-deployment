@@ -14,8 +14,8 @@ class InventoryForm(forms.ModelForm):
 class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
-        fields = '__all__'
-        
+        fields = ('type','make','model','year','plateNumber')
+    
         
 class ClientForm(forms.ModelForm):
     class Meta:
@@ -26,17 +26,13 @@ class DiagnosisForm(forms.ModelForm):
     class Meta:
         model = Diagnosis
         fields = '__all__'
-        
     def __init__(self,*args,**kwargs):
         super(DiagnosisForm,self).__init__(*args,**kwargs)
         
 class JobsForm(forms.ModelForm):
-    # customJob = Diagnosis.add_to_class('test',models.CharField(max_length=254))
     class Meta:
         model = Jobs
         fields = '__all__'
-        
-
 class InvoiceForm(forms.ModelForm):
     class Meta:
         model = Invoice

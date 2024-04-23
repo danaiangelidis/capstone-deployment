@@ -21,11 +21,6 @@ body {
     box-shadow: 2px 0px 5px rgb(37, 37, 37);
     overflow: hidden;
     max-width: 15%;
-    overflow-y: auto;
-}
-
-#main-nav::-webkit-scrollbar {
-    display: none;
 }
 
 #main-nav img {
@@ -60,7 +55,6 @@ body {
 main {
     margin: auto;
     padding-left: 120px;
-    text-align: center;
 }
 
 main h1 {

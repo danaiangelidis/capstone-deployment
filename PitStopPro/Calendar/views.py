@@ -5,14 +5,14 @@ from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 import calendar
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 from .models import *
 from .utils import Calendar
 from .forms import EventForm
 # Create your views here.
 
-class CalendarView(LoginRequiredMixin,generic.ListView):
+
+class CalendarView(generic.ListView):
     model = Event
     template_name = 'calendar.html'
 
@@ -37,7 +37,6 @@ def get_date(req_day):
         year, month = (int(x) for x in req_day.split('-'))
         return date(year, month, day=1)
     return datetime.today()
-
 def prev_month(d):
     first = d.replace(day=1)
     prev_month = first - timedelta(days=1)

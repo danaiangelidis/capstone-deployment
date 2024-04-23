@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Login</title>
-    <link rel="stylesheet" href="../../static/login.css">
-</head>
-<body>
-    <img src="../../static/assets/logo2.png" alt="logo">
-    <div>
-        <h1>Log In</h1>
-        {% if error_message %}
-            <p class="error">{{ error_message }}</p>
-        {% endif %}
-        <form method="POST" action="{% url 'login/' %}">
-            {% csrf_token %}
-            <label>Email</label>
-            <input type="email" placeholder="Email" name="email" required>
-            <label>Password</label>
-            <input type="password" placeholder="Password" name="password" required>
-            <input type="submit" value="Log In">
-        </form>
-        <p>New here? <a id="sign-up" href="{% url 'signup/' %}">Create Account</a></p>
-        <p>By using PitStopPro you agree to our <br>
-            <a href="{% url 'terms-and-conditions' %}">Terms and Conditions</a> and <a href="{% url 'privacy-policy'%}">Privacy Policy</a>
-        </p>
-    </div>
-</body>
+<html lang = "en">
+
+    <head>
+        <title> Login </title>
+        <link rel = "stylesheet" href= "../../static/login.css">
+    </head>
+    <body>
+        <img src = "../../static/assets/logo.png" alt = "logo">
+        <div>
+            <h1>Welcome Back!</h1>
+                <form method = "POST" action = "{% url 'login/' %}">
+                {%csrf_token%}  
+                    <label> Email</label>
+                    <input type = "text" placeholder = "email" name = "email">
+                    <label>Password</label>
+                    <input type = "text" placeholder = "password" name = "password">
+                    <input type = "submit" value = "Log In">
+                </form>
+            <p>New here?<a href = "{% url 'signup/'%}">Create Account</a></p>
+            <p>By using PitStopPro you agree to our <br>
+            <a href = "#">Terms and Conditions</a> and <a href = #>Privacy Policy</a>
+            </p>
+        </div>
+    </body>
 </html>

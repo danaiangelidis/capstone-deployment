@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Add Client</title>
+        <link rel="stylesheet" href="../../static/addclient.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/images/logo.png"></a>
+            <ul>
+                <a href="{% url 'calendar' %}"><li>Calendar</li></a>
+                <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
+                <a href="{% url 'inventory' %}"><li>Inventory</li></a>
+                <a href="{% url 'employee_list' %}"><li>Employees</li></a>
+                <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
+                <a href="{% url 'pricing' %}"><li>Pricing</li></a>
+                <a href="{% url 'contact' %}"><li>Contact Us</li></a>
+                <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
+                <a href="{% url 'jobs' %}"><li>Jobs</li></a>
+                <a href="{% url 'customers' %}"><li>Rewards</li></a>
+                <a href="{% url 'settings/' %}"><li>Log Out</li></a>
+            </ul>
+        </nav>
+        <main id="main-content">
+            <form method="POST" action="{% url 'addclient' %}">
+                <h1>Add Client</h1>
+                <a href="{% url 'addvehicle' %}">
+                    <button>Add Vehicle</button>
+                </a>
+                {% csrf_token %}
+                <section id="client-info">
+                    
+                    <h3>Client Information</h3>
+                    <p>
+                        <table>{{  clientform.as_table }}</table>
+                   </p>  
+                </section>
+                <hr>
+                <input type="submit" value="Submit Client" class="btn btn-secondary">
+            </form>
+        </main>
+        <footer id="main-footer">
+            <a href="{% url 'jobs' %}"><p>View All Jobs</p></a>
+        </footer>
+    </body>
+</html>

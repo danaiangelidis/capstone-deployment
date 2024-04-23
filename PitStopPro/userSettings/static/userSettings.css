@@ -1,61 +1,57 @@
-/* Body */
-
-body {
+body{
+    background-image: url('../../static/assets/mechanic.jpg');
     background-color: rgb(51, 51, 51);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: lighter;
     color: white;
-}
-
-div {
+   }
+   div{
     width: 40%;
     margin: auto;
-    text-align: center;
-    background-color: rgba(92, 92, 92, 0.363);
-    padding: 7px;
-}
-
-h1 {
-    text-align: center;
-    margin-top: 5px;
-}
-
-img {
-    outline: none;
-    width: 400px;
-    height: auto;
-    display: block;
-    margin: auto;
-    padding: 10px;
-}
-
-/* Logout Form */
-   
-form input[type="submit"] {
-    width: 250px;
-    height: 35px;
-    margin-top: 20px;
-    border: none;
-    background-color: rgb(155, 1, 1);
+    background-color: rgba(51, 51, 51,0.7);
+    border-radius: 6px;
+    font-family: 'Roboto', sans-serif;
     color: white;
-    font-size: 18px;
-    display: block;
-    margin: 10px auto;
-}
-
-form input[type="submit"]:hover {
-    background-color: rgb(190, 0, 0);
-    cursor: pointer;
-}
-
-p {
     text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 15px;
-}
+    padding: 20px;
+   }
+   h1{
+       text-align: center;
+       padding-top: 15px;
+   }
+   img{
+        text-align: center;
+        padding-top: 15px;
+        outline: none;
+        width: 150px;
+        height: 150px;
+        display: block;
+        margin: auto;
+        padding-bottom: 10px;
+   }
+   
+   form input[type="submit"]{
+       width: 70%;
+       height: 35px;
+       border: none;
+       background-color: rgb(198, 0, 0);
+       color: white;
+       font-size: 18px;
+       display: block;
+       margin: 10px auto;
+       padding-top: 10px;
+       text-align: center;
+       border-radius:3px;
+       padding-bottom: 10px;
+   }
+   p{
+       text-align: center;
+       padding-top: 10px;
+       padding-bottom: 10px;
+       font-size: 15px;
+   }
 
-/* Main Navigation */
+   /* Main Navigation */
 
 #main-nav {
     width: 120px;
@@ -69,11 +65,6 @@ p {
     box-shadow: 2px 0px 5px rgb(37, 37, 37);
     overflow: hidden;
     max-width: 15%;
-    overflow-y: auto;
-}
-
-#main-nav::-webkit-scrollbar {
-    display: none;
 }
 
 #main-nav img {
@@ -114,17 +105,5 @@ p {
 
     #main-nav li {
         padding: 15px 15px;
-    }
-
-    div {
-        width: 90%;
-    }
-
-    section {
-        padding-left: 100px;
-    }
-
-    img {
-        width: 300px;
     }
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PitStopPro</title>
+        <link rel="stylesheet" href="../../static/jobs.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/assets/logo.png"></a>
+            <ul>
+                <a href="{% url 'calendar' %}"><li>Calendar</li></a>
+                <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
+                <a href="{% url 'inventory' %}"><li>Inventory</li></a>
+                <a href="{% url 'employee_list' %}"><li>Employees</li></a>
+                <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
+                <a href="{% url 'pricing' %}"><li>Pricing</li></a>
+                <a href="{% url 'contact' %}"><li>Contact Us</li></a>
+                <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
+                <a href="{% url 'jobs' %}"><li>Jobs</li></a>
+                <a href="{% url 'customers' %}"><li>Rewards</li></a>
+                <a href="{% url 'settings/' %}"><li>Log Out</li></a>
+            </ul>
+        </nav>
+        <main>
+        <section id="title">
+            <h1>Created Jobs</h1>
+            <a href="{% url 'createjobs' %}">
+                <button>Create New Job</button>
+            </a>
+        </section>
+        <section id="invoices">
+            {% for job in jobs %}
+            <article class="invoice">
+                <hr>
+                <div class="to">
+                    <h2 id="cusName">{{job}}</h2>
+                    {% for type in job.type.all %}
+                    <h5>{{ type }}</h5>
+                    {%endfor%}
+                    {% for employee in job.employee.all %}
+                    <h5>{{ employee }}</h5>
+                    {%endfor%}
+                    <section class="buttons">
+                        <a href="{% url 'invoicing' %}">
+                            <button>Create Invoice</button>
+                        </a>
+                        <a href="{% url 'delete_job' job.id %}">
+                            <button>Delete Job</button>
+                        </a>
+                    </section>
+                <hr>
+            </article>
+            {% endfor %}
+        </section>
+    </main>
+    </body>
+</html>

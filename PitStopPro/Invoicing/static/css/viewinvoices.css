@@ -20,11 +20,6 @@ body {
     box-shadow: 2px 0px 5px rgb(37, 37, 37);
     overflow: hidden;
     max-width: 15%;
-    overflow-y: auto;
-}
-
-#main-nav::-webkit-scrollbar {
-    display: none;
 }
 
 #main-nav img {
@@ -102,6 +97,17 @@ td {
     max-width: 80%;
 }
 
+/* Download Button */
+
+#download-button {
+    cursor: pointer;
+    text-decoration: underline transparent;
+}
+
+#download-button:hover {
+    text-decoration: underline white;
+}
+
 /* Button */
 
 button {
@@ -117,52 +123,10 @@ button {
 
 button:hover {
     background-color: rgb(69, 69, 69);
-    cursor: pointer;
 }
 
 a {
     text-decoration: none;
-}
-
-#buttons {
-    display: flex;
-}
-
-#buttons button {
-    margin-right: 20px;
-}
-
-/* Modal Dialog */
-
-.hidden {
-    display: none;
-}
-
-.modal {
-    overflow-y: auto;
-    position: fixed;
-    z-index: 1000;
-    left: 25%;
-    top: 5%;
-    width: 50%;
-    height: 25%;
-    max-height: 70%;
-    padding: 20px;
-    background-color: rgb(69, 69, 69);
-    box-shadow: 0px 0px 10px rgb(36, 36, 36);
-}
-
-.close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    padding: 0px 5px;
-}
-
-.close:hover {
-    color: rgb(110, 110, 110);
-    cursor: pointer;
 }
 
 /* Media Query */
@@ -184,9 +148,5 @@ a {
     
     .invoice {
         width: 80%;
-    }
-
-    .modal {
-        height: 32%;
     }
 }

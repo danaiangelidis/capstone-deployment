@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PitStopPro</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="../../static/css/newInventory.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/assets/logo.png"></a>
+            <ul>
+                <a href="{% url 'calendar' %}"><li>Calendar</li></a>
+                <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
+                <a href="{% url 'inventory' %}"><li>Inventory</li></a>
+                <a href="{% url 'employee_list' %}"><li>Employees</li></a>
+                <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
+                <a href="{% url 'pricing' %}"><li>Pricing</li></a>
+                <a href="{% url 'contact' %}"><li>Contact Us</li></a>
+                <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
+                <a href="{% url 'jobs' %}"><li>Jobs</li></a>
+                <a href="{% url 'customers' %}"><li>Rewards</li></a>
+                <a href="{% url 'settings/' %}"><li>Log Out</li></a>
+            </ul>
+        </nav>
+
+    {% block content %}
+    <h1 id="title">Add Inventory</h1>
+    {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{ field.label }} <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ field.label }} <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+<form id="form" method="post">
+  {% csrf_token %}
+  <table class="form-table">
+    {{ form }}
+    <tr>
+        <td colspan="2" id="buttons">
+            <button type="submit" class="btn btn-info right">Submit</button>
+            <a class="backbtn btn-info right" href="{% url 'inventory' %}">Back</a>
+        </td>
+    </tr>    
+  </table>
+</form>
+{% endblock %}
+
+    </body>
+</html>

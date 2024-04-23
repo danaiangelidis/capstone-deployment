@@ -2,36 +2,34 @@
 <html lang = "en">
 
     <head>
-        <title>PitStopPro </title>
+        <title>Settings </title>
         <link rel = "stylesheet" href="../../static/userSettings.css">
     </head>
     <body>
         <nav id="main-nav">
             <a href="{% url 'home' %}"><img src="../../static/assets/logo.png"></a>
             <ul>
-                <a href="{% url 'calendar' %}"><li>Calendar</li></a>
-                <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
-                <a href="{% url 'inventory' %}"><li>Inventory</li></a>
-                <a href="{% url 'employee_list' %}"><li>Employees</li></a>
-                <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
-                <a href="{% url 'pricing' %}"><li>Pricing</li></a>
-                <a href="{% url 'contact' %}"><li>Contact Us</li></a>
-                <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
-                <a href="{% url 'jobs' %}"><li>Jobs</li></a>
-                <a href="{% url 'customers' %}"><li>Rewards</li></a>
-                <a href="{% url 'settings/' %}"><li>Log Out</li></a>
+                <li><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li><a href="{% url 'earnings_view' 'monthly' %}">Earnings</a></li>
+                <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'employee_list' %}">Employees</a></li>
+                <li><a href="{% url 'invoicing' %}">Invoices</a></li>
+                <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                <li><a href="{% url 'settings/' %}">Settings</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                <li><a href="{% url 'customerContact' %}">Customer Support</a></li>
+                <li><a href="{% url 'jobs' %}">Jobs</a></li>
+                <li><a href="{% url 'customers' %}">Rewards</a></li>
             </ul>
         </nav>
-        <section id="main">
-            <img src = "../static/assets/logo2.png" alt = "logo">
-            <div>
-                <h1>Hi {{ user.first_name }}!</h1>
-                <p>email: {{user.email}} </p>
-                <form method = "POST" action = "{% url 'settings/' %}">
-                {%csrf_token%} 
-                        <input type = "submit" value = "Log Out"/>
-                </form>
-            </div>
-        </section>
+        <img src = "../../static/assets/logo.png" alt = "logo">
+        <div>
+            <h1>Hi {{ user.first_name }} !</h1>
+            <p>email: {{user.email}} </p>
+            <form method = "POST" action = "{% url 'settings/' %}">
+            {%csrf_token%} 
+                    <input type = "submit" value = "Logout"/>
+            </form>
+        </div>
     </body>
 </html>

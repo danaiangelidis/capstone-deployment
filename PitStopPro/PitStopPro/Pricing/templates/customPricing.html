@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PitStopPro</title>
+    <link rel="stylesheet" href="../../static/customPricing.css">
+    <script src="../../static/customPricing.js" defer></script>
+</head>
+<body>
+    <nav id="main-nav">
+        <a href="{% url 'home' %}"><img src="../../static/assets/logo.png"></a>
+        <ul>
+            <a href="{% url 'calendar' %}"><li>Calendar</li></a>
+            <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
+            <a href="{% url 'inventory' %}"><li>Inventory</li></a>
+            <a href="{% url 'employee_list' %}"><li>Employees</li></a>
+            <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
+            <a href="{% url 'pricing' %}"><li>Pricing</li></a>
+            <a href="{% url 'contact' %}"><li>Contact Us</li></a>
+            <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
+            <a href="{% url 'jobs' %}"><li>Jobs</li></a>
+            <a href="{% url 'customers' %}"><li>Rewards</li></a>
+            <a href="{% url 'settings/' %}"><li>Log Out</li></a>
+        </ul>
+    </nav>
+    <main id="main-content">
+        <form id="form">
+            <h1>Pricing Estimator</h1>
+            
+            <div id ="client-info">
+                <h3>Customer And Vehicle Information</h3>
+                <div id = "client-info-piece">
+                    <label for="customer-name">Customer Name</label>
+                    <input type="text" id="customer-name" required>
+                </div>
+                <div id = "client-info-piece">
+                    <label for="vehicle">Vehicle</label>
+                    <input type="text" id="vehicle" required>
+                </div>
+                <div id = "client-info-piece">
+                    <label for="diagnosis">Diagnosis</label>
+                    <textarea id="diagnosis" required></textarea>
+                </div>
+            </div>
+            <h3>Labor</h3>
+            <div id="labor-items">
+               
+            </div>
+            <button class="button" type="button" id="add-labor-item">Add Labor Item</button>
+
+            <h3>Parts</h3>
+            <div id="part-items">
+                
+            </div>
+            <button class="button" type="button" id="add-part-item">Add Part Item</button>
+            
+            <div>
+                <button class="button" type="button" id="calculate-estimate">Quote</button>
+            </div>
+        </form>
+        <div id="myModal" class="hidden modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Estimate Details</h2>
+                <p>Customer Name: <span id="customer-name-output"></span></p>
+                <p>Vehicle: <span id="vehicle-output"></span></p>
+                <p>Diagnosis: <span id="diagnosis-output"></span></p>
+                <p>Labor Cost: <span id="labor-cost"></span></p>
+                <p>Parts Cost: <span id="parts-cost"></span></p>
+                <p>Total Estimate: <span id="total-estimate"></span></p>
+            </div>
+        </div>
+
+        <div id="are-you-sure" class="hidden ays-box">
+            <span id="close-ays" class="close-ays-box">&times;</span>
+            <p>Please fill in all labor and part item fields with valid values.</p>
+            <div id="buttons">
+                <a id="ays-ok"><button id="ays-ok-button">OK</button></a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!-- Written by Thomas Ferguson -->
+<!-- This HTML document is part of the Earnings app within a Django web application.
+     It displays the user interface for viewing and updating earnings data. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PitStopPro</title>
+    {% load static %} <!-- Django template tag to load static files -->
+    <link rel="stylesheet" href="{% static 'earnings.css' %}"> <!-- Link to the earnings-specific stylesheet -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Importing Chart.js for graphing capabilities -->
+</head>
+<body>
+    <nav id="main-nav">
+        <!-- Navigation bar for the application, using Django template tags to generate URLs -->
+        <a href="{% url 'home' %}"><img src="{% static 'assets/logo.png' %}" alt="Logo"></a>
+        <ul>
+            <a href="{% url 'calendar' %}"><li>Calendar</li></a>
+            <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
+            <a href="{% url 'inventory' %}"><li>Inventory</li></a>
+            <a href="{% url 'employee_list' %}"><li>Employees</li></a>
+            <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
+            <a href="{% url 'pricing' %}"><li>Pricing</li></a>
+            <a href="{% url 'contact' %}"><li>Contact Us</li></a>
+            <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
+            <a href="{% url 'jobs' %}"><li>Jobs</li></a>
+            <a href="{% url 'customers' %}"><li>Rewards</li></a>
+            <a href="{% url 'settings/' %}"><li>Log Out</li></a>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Main container for the earnings view -->
+        <h1>Earnings</h1>
+        <div class="inputs">
+            <!-- Container for the input elements to set the number of months for the earnings graph -->
+            <div id="months-container">
+                <label for="num_months">Number of Months:</label>
+                <input type="number" id="num_months" name="num_months" value="12" min="1" max="12">
+                <button type="button" class="button" onclick="createMonthFields()">Set Months</button>
+            </div>
+            <div id="earnings-inputs"></div>
+            <form method="post">
+                {% csrf_token %}
+                <!--{{ form.as_p }}-->
+                <button type="button" onclick="updateGraph()" class="button">Update Graph</button>
+            </form>
+        </div>
+
+        <canvas id="earnings-chart" width="800" height="400"></canvas> <!-- Canvas for the Chart.js graph -->
+
+        <a href="{% url 'download_report' 'current' %}" id="download-button" class="button">Download PDF</a>
+
+        <div id="are-you-sure" class="hidden ays-box">
+            <span id="close-ays" class="close-ays-box">&times;</span>
+            <p>Please fill all the fields.</p>
+            <div id="buttons">
+                <a id="ays-ok"><button id="ays-ok-button">OK</button></a>
+            </div>
+        </div>
+
+        <script>
+        const updateUrl = '{% url "update_graph" %}'
+        
+        function showAlert() {
+            document.getElementById("are-you-sure").classList.remove("hidden");
+
+            document.getElementById("close-ays").onclick = () => {
+                document.getElementById("are-you-sure").classList.add("hidden");
+            };
+
+            document.getElementById("ays-ok").onclick = () => {
+                document.getElementById("are-you-sure").classList.add("hidden");
+            };
+        }
+
+        function createMonthFields() {
+            var container = document.getElementById('earnings-inputs');
+            container.innerHTML = '';
+            var numMonths = document.getElementById('num_months').value;
+            for (let i = 1; i <= numMonths; i++) {
+                var input = document.createElement('input');
+                input.type = 'number';
+                input.name = 'month' + i;
+                input.placeholder = 'Earnings for Month ' + i;
+                container.appendChild(input);
+                container.appendChild(document.createElement('br'));
+            }
+        }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+        const csrftoken = getCookie('csrftoken');
+
+        function updateGraph() {
+            var earnings = {};
+            var numMonths = document.getElementById('num_months').value;
+            var allFilled = true;
+
+            for (let i = 1; i <= numMonths; i++) {
+                var input = document.getElementsByName('month' + i)[0];
+                if (input.value === ""){
+                    showAlert();
+                    input.focus();
+                    allFilled = false;
+                    break;
+                }
+                earnings['Month ' + i] = input.value;
+                earnings['Month ' + i] = document.getElementsByName('month' + i)[0].value;
+            }
+            
+            if (!allFilled) return;
+
+            fetch(updateUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({earnings: earnings})
+            })
+            .then(response => response.json())
+            .then(data => {
+                updateChartData(chart, data.labels, data.values);
+            }).catch(error => console.error('Error updating graph:', error));
+        }
+
+        function updateChartData(chart, labels, data) {
+            chart.data.labels = labels;
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data = data;
+            });
+            chart.update();
+        }
+
+            var labels = JSON.parse('{{ labels|safe }}');
+            var values = JSON.parse('{{ values|safe }}');
+            
+            var ctx = document.getElementById('earnings-chart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Earnings Over Time',
+                        data: values,
+                        borderColor: '#BE0000',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>

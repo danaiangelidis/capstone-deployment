@@ -21,11 +21,6 @@ body {
     box-shadow: 2px 0px 5px rgb(37, 37, 37);
     overflow: hidden;
     max-width: 15%;
-    overflow-y: auto;
-}
-
-#main-nav::-webkit-scrollbar {
-    display: none;
 }
 
 #main-nav img {
@@ -77,7 +72,6 @@ button {
     font-weight: bold;
     padding: 10px 20px;
     box-shadow: 0px 0px 5px rgb(37, 37, 37);
-    margin: auto;
 } 
 
 button:hover {
@@ -87,14 +81,6 @@ button:hover {
 
 a {
     text-decoration: none;
-}
-
-.buttons {
-    display: flex;
-}
-
-.buttons button {
-    margin-right: 10px;
 }
 
 /* Media Query */

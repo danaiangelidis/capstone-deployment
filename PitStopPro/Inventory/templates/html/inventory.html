@@ -2,59 +2,60 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>PitStopPro</title>
+    <title>Inventory</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
     <link rel="stylesheet" href="../../static/css/inventory.css">
 </head>
+
+
   <nav id="main-nav">
       <a href="{% url 'home' %}"><img src="../../static/assets/logo.png"></a>
       <ul>
-        <a href="{% url 'calendar' %}"><li>Calendar</li></a>
-        <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
-        <a href="{% url 'inventory' %}"><li>Inventory</li></a>
-        <a href="{% url 'employee_list' %}"><li>Employees</li></a>
-        <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
-        <a href="{% url 'pricing' %}"><li>Pricing</li></a>
-        <a href="{% url 'contact' %}"><li>Contact Us</li></a>
-        <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
-        <a href="{% url 'jobs' %}"><li>Jobs</li></a>
-        <a href="{% url 'customers' %}"><li>Rewards</li></a>
-        <a href="{% url 'settings/' %}"><li>Log Out</li></a>
+        <li><a href="{% url 'calendar' %}">Calendar</a></li>
+        <li><a href="{% url 'earnings_view' 'monthly' %}">Earnings</a></li>
+        <li><a href="{% url 'inventory' &}">Inventory</a></li>
+        <li><a href="{% url 'employee_list' %}">Employees</a></li>
+        <li><a href="{% url 'invoicing' %}">Invoices</a></li>
+        <li><a href="{% url 'pricing' %}">Pricing</a></li>
+        <li><a href="{% url 'settings/' %}">Settings</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        <li><a href="{% url 'customerContact' %}">Customer Support</a></li>
+        <li><a href="{% url 'jobs' %}">Jobs</a></li>
+        <li><a href="{% url 'customers' %}">Rewards</a></li>
       </ul>
   </nav>
   <main id="main-content">
     <header>
-      <h1 id="title">Inventory</h1>
-      {% block content %}
-      <div class="goback">
-        <a class="btn btn-info left" href="{% url 'new_inventory' %}">Add Inventory</a>
-      </div>
-      {% endblock %}
+    <h1>Inventory</h1>
     </header>
     <br>
-    <table>
-      {% for item in all %}
-      
-        <th><a href ="{% url 'edit_inventory' item.id%}"><strong>ID:</strong> {{item.stockNumber}}</a></th><br>
-        <td>Type: {{item.type}}</td>
-        <td>Quantity: {{item.quantity}}</td>
-        <td>Price: ${{item.price}}</td>
-        <td>Brand Name: {{item.partName}}</td>
-        <td>Description: {{item.description}}</td>
-        <td><div class="right"><a class="btn" href="{% url 'edit_inventory' item.id%}">Edit</a></div></td>
-        <td><div class="right"><a class="btn" id="delete-button" onclick="document.getElementById('are-you-sure-{{item.id}}').classList.remove('hidden')">Delete</a></div></td>
-        <tr></tr>
+<table>
+  {% for item in all %}
+  
+    <th><a href ="{% url 'edit_inventory' item.id%}"><strong>ID:</strong> {{item.stockNumber}}</a></th><br>
+    <td>Type: {{item.type}}</td>
+    <td>Quantity: {{item.quantity}}</td>
+    <td>Price: ${{item.price}}</td>
+    <td>Brand Name: {{item.partName}}</td>
+    <td>Description: {{item.description}}</td>
+    <td><div class="right"><a class="btn" href="{% url 'edit_inventory' item.id%}">edit</a></div></td>
+    <td><div class="right"><a onclick="return confirm('are you sure')" class="btn" href="{% url 'delete_inventory' item.id%}">delete</a></div></td>
+    <tr></tr>
+  {% endfor %}
+</table>
+</main>
+<body>
+  {% block content %}
+    <div class="goback">
+            <a class="btn btn-info left" href="{% url 'new_inventory' %}">Add Inventory</a>
+    </div>
+    {% endblock %}
+</body>
 
-        <div id="are-you-sure-{{item.id}}" class="hidden modal">
-          <span id="close-ays" class="close" onclick="document.getElementById('are-you-sure-{{item.id}}').classList.add('hidden')">&times;</span>
-          <h2>Hang on!</h2>
-          <p>Are you sure you want to delete this inventory? This can't be undone.</p>
-          <div id="buttons">
-              <a id="ays-yes" href="{% url 'delete_inventory' item.id%}"><button class="btn">Yes</button></a>
-              <a id="ays-no"><button class="btn" onclick="document.getElementById('are-you-sure-{{item.id}}').classList.add('hidden')">No</button></a>
-          </div>
-      </div>
-      {% endfor %}
-    </table>
-  </main>
+
+
+
 </html>

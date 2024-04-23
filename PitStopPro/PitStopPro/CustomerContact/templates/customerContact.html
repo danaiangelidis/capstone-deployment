@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PitStopPro</title>
+        <link rel="stylesheet" href="../../static/customerContact.css">
+    </head>
+    <body>
+        <nav id="main-nav">
+            <a href="{% url 'home' %}"><img src="../../static/assets/logo.png"></a>
+            <ul>
+                <a href="{% url 'calendar' %}"><li>Calendar</li></a>
+                <a href="{% url 'earnings_view' 'monthly' %}"><li>Earnings</li></a>
+                <a href="{% url 'inventory' %}"><li>Inventory</li></a>
+                <a href="{% url 'employee_list' %}"><li>Employees</li></a>
+                <a href="{% url 'invoicing' %}"><li>Invoices</li></a>
+                <a href="{% url 'pricing' %}"><li>Pricing</li></a>
+                <a href="{% url 'contact' %}"><li>Contact Us</li></a>
+                <a href="{% url 'customerContact' %}"><li>Customer Support</li></a>
+                <a href="{% url 'jobs' %}"><li>Jobs</li></a>
+                <a href="{% url 'customers' %}"><li>Rewards</li></a>
+                <a href="{% url 'settings/' %}"><li>Log Out</li></a>
+            </ul>
+        </nav>
+        <main>
+            <h1>Customer Support</h1>
+            <div class="messagebox">
+                <div class="inbox">
+                    <h1>Inbox</h1>
+                    <hr>
+                    {% for inbound in inbox %}
+                    <div class="inboxMessage">
+                    <h3>{{inbound.subject}}</h3>
+                    <h1>{{inbound.firstName}} {{inbound.lastName}}</h1>
+                    <h4>{{inbound.email}} - {{inbound.company}}</h4>
+                    <hr>
+                </div>
+                 
+                {% endfor %}
+                </div>
+                
+                <div class="messages">
+                    <h1>Client Contact List</h1>
+                    <hr>
+                    <a id="messageall" href="{% url 'sendtoall' %}">Message All</a>
+                    {% for client in clients %}
+                        <div class="clientlist">
+                            <a href="{% url 'sendMessage' client.clientID %}"><strong>{{client.firstName}} {{client.lastName}}</strong> - {{client.phoneNumber}}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

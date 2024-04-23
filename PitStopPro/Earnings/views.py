@@ -1,11 +1,9 @@
 import matplotlib
 matplotlib.use('Agg')
 
-from .forms import EarningsForm
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from django.template.loader import render_to_string
-from django.views.decorators.csrf import csrf_exempt
 from io import BytesIO
 import base64
 from django.core.files.base import ContentFile
@@ -18,56 +16,10 @@ from .models import Transaction
 from datetime import datetime, timedelta
 from reportlab.lib.utils import ImageReader
 from reportlab.lib.units import inch
-import json
-
 
 def earnings_view(request, period):
-    form = EarningsForm(request.POST or None)
-    if form.is_valid():
-        num_months = form.cleaned_data['num_months']
-        earnings_per_month = form.cleaned_data['earnings_per_month']
-        earnings_data = {f'Month {i + 1}': earnings_per_month for i in range(num_months)}
-        request.session['graph_labels'] = list(earnings_data.keys())
-        request.session['graph_values'] = list(earnings_data.values())
-
-    labels = request.session.get('graph_labels', ['Month 1'])
-    values = request.session.get('graph_values', [0])
-
-    context = {
-        'form': form,
-        'labels': json.dumps(labels),
-        'values': json.dumps(values),
-    }
-
-    return render(request, 'Earnings/earnings_page.html', context)
-
-
-@csrf_exempt
-def update_graph(request):
-    try:
-        data = json.loads(request.body)
-        earnings = data.get('earnings')
-        labels = list(earnings.keys())
-        values = [float(val) for val in earnings.values()]
-
-        request.session['graph_labels'] = labels
-        request.session['graph_values'] = values
-        
-        return JsonResponse({'labels': labels, 'values': values})
-    except Exception as e:
-        return JsonResponse({'error': str(e)}, status=400)
-
-
-def retrieve_current_session_data(request):
-    labels = request.session.get('graph_labels', [])
-    values = request.session.get('graph_values', [])
-    return labels, values
-
-def download_report(request, period):
     today = datetime.today()
-    if period == 'current':
-        labels, values = retrieve_current_session_data(request)
-    elif period == 'weekly':
+    if period == 'weekly':
         start_date = today - timedelta(days=today.weekday())
     elif period == 'monthly':
         start_date = today.replace(day=1)
@@ -75,20 +27,38 @@ def download_report(request, period):
         start_month = (today.month - 1) - (today.month - 1) % 3 + 1
         start_date = today.replace(month=start_month, day=1)
     else:
+        # Handle incorrect period or set a default
         start_date = today
-    # Generate earnings chart
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
-    p = canvas.Canvas(response)
 
-    #earningsData = {
-    #    'Week 1': 5000,
-    #    'Week 2': 6000,
-    #    'Week 3': 7000,
-    #    'Week 4': 8000
-    #}
-    # labels = list(earningsData.keys())
-    # values = list(earningsData.values())
+    earnings = Transaction.objects.filter(date__gte=start_date).aggregate(total_earnings=Sum('amount'))['total_earnings']
+
+    return render(request, 'Earnings/earnings_page.html', {
+        'earnings': earnings, 
+        'period': period  # Add this line to pass 'period' to your template
+    })
+
+
+def download_report(request, period):
+    today = datetime.today()
+    if period == 'weekly':
+        start_date = today - timedelta(days=today.weekday())
+    elif period == 'monthly':
+        start_date = today.replace(day=1)
+    elif period == 'quarterly':
+        start_month = (today.month - 1) - (today.month - 1) % 3 + 1
+        start_date = today.replace(month=start_month, day=1)
+    else:
+        # Handle incorrect period or set a default
+        start_date = today
+    # Generate the earnings chart
+    earningsData = {
+        'Week 1': 5000,
+        'Week 2': 6000,
+        'Week 3': 7000,
+        'Week 4': 8000
+    }
+    labels = list(earningsData.keys())
+    values = list(earningsData.values())
     
     buffer = io.BytesIO()
     
@@ -122,9 +92,49 @@ def download_report(request, period):
     
     p.setFont("Helvetica-Bold", 14)
     p.drawString(100, canvas_height - inch, "Earnings Report - {}".format(period.capitalize()))
-    for label, value in zip(labels, values):
-        p.drawString(100, y_position, f"{label}: ${value}")
-        y_position -= 20
+    
+    
+    # img_reader = ImageReader(buffer)
+    # img_width, img_height = img_reader.getSize()
+    
+    # img_str = base64.b64encode(buffer.getvalue()).decode()
+    # buffer.close()
+    
+    # response = HttpResponse(content_type='application/pdf')
+    # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    
+    # p = canvas.Canvas(response)
+    
+    # Calculate the appropriate dimensions to fit the graph within the PDF canvas
+    # graph_width = min(img_width, canvas_width - 200)
+    # graph_height = min(img_height, canvas_height - 200)
+    
+    # Calculate the positioning to center the graph
+    # x_position = (canvas_width - graph_width) / 2
+    # y_position = (canvas_height - graph_height) / 2
+    
+    # Draw the graph on the PDF canvas
+    # p.drawImage(img_reader, x_position, y_position, width=graph_width, height=graph_height)
+    
+    # p.drawString(100, 300, "Earnings Report - {}".format(period.capitalize()))
+    
     p.showPage()
     p.save()
+    
+    # html_content = render_to_string('earnings/earnings_report_with_graph.html', {'img_str': img_str})
+    
+    # p.drawString(100, 800, "Earnings Report - {}".format(period.capitalize()))
+    # p.drawHTMLString(html_content, 100, 700)
+    
+    
+    # response = HttpResponse(content_type='application/pdf')
+    # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+
+    # p = canvas.Canvas(response)
+
+    # Example content, customize as needed
+    # p.drawString(100, 100, "Earnings Report - {}".format(period.capitalize()))
+
+    # p.showPage()
+    # p.save()
     return response

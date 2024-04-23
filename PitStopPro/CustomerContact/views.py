@@ -46,8 +46,8 @@ def sendMessage(request, clientID= None):
     if clientID:
         instance = get_object_or_404(Cl,pk=clientID)
         clientNumber = instance.phoneNumber
-        # if message != None:
-            # sendSMS(clientNumber,message)
+        if message != None:
+            sendSMS(clientNumber,message)
             
     clientINFO = Cl.objects.all()
     context = {'clients': clientINFO, 'clientNumber':clientNumber}
@@ -57,10 +57,10 @@ def sendMessage(request, clientID= None):
 def sendToAll(request):
     message = request.POST.get('message')
     instance = Cl.objects.all()
-    # for number in instance:
-        # if message != None:
+    for number in instance:
+        if message != None:
             
-            # sendSMS(number.phoneNumber,message)
+            sendSMS(number.phoneNumber,message)
     clientINFO = Cl.objects.all()
     clientNumber = "ALL"
     context = {'clients': clientINFO, 'clientNumber':clientNumber}
